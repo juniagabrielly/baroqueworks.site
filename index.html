@@ -156,14 +156,18 @@
         </div>
       </div>
 
-      <!-- Card do herói com VÍDEO principal -->
+      <!-- Card do herói com VÍDEO principal (looping, autoplay, sem controles) -->
       <div class="hero__card">
         <span class="badge">17 anos de experiência na construção, 6 anos dedicados à Engenharia Civil</span>
         <video class="hero__media"
                src="assets/video_inicio.mp4"
-               autoplay muted loop playsinline preload="metadata">
-          <source src="assets/video_inicio.mp4" type="video/mp4">
-          Seu navegador não suporta vídeo HTML5.
+               autoplay
+               muted
+               loop
+               playsinline
+               preload="metadata"
+               style="border-radius:14px;">
+          <!-- A tag <source> é opcional quando já usamos src direto -->
         </video>
       </div>
     </div>
@@ -408,6 +412,12 @@
       }
       slider.querySelector('.prev').addEventListener('click',()=>go(idx-1));
       slider.querySelector('.next').addEventListener('click',()=>go(idx+1));
+    });
+
+    // Tentativa de dar play automático (alguns navegadores precisam do .play() explícito)
+    window.addEventListener('DOMContentLoaded', ()=>{
+      const v = document.querySelector('.hero__media');
+      if(v){ v.muted = true; v.play().catch(()=>{/* se bloqueado, o vídeo fica pausado até interação */}); }
     });
   </script>
 </body>
