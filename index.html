@@ -33,7 +33,7 @@
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
       font-weight:400;line-height:1.6;position:relative;min-height:100%
     }
-    img,video{max-width:100%;height:auto;display:block}
+    img{max-width:100%;height:auto}
     a{color:inherit;text-decoration:none}
     .container{width:min(1120px,92%);margin-inline:auto}
 
@@ -124,28 +124,6 @@
       nav ul{display:none}
     }
   </style>
-
-  <!-- === OVERRIDES – Layout grande (container/logo/tipos) === -->
-  <style>
-    .container{ width:min(1280px,94%) !important; }
-    .brand img{ height:96px !important; }
-    @media (max-width:1024px){ .brand img{ height:80px !important; } }
-    @media (max-width:600px){ .brand img{ height:64px !important; } }
-    section{ padding:72px 0 !important; }
-    html{ font-size:17.5px; } /* aumenta “tudo” um pouco */
-    .lead{ font-size:clamp(18px,1.9vw,19px) !important; }
-    .h1{ font-size:clamp(34px,4.2vw,40px) !important; line-height:1.12 !important; }
-    .sec__title{ font-size:clamp(26px,3.2vw,32px) !important; }
-    .card h3,.work__title{ font-size:clamp(20px,2.4vw,22px) !important; }
-    .card p,.work__desc,.sec__desc,footer p{ font-size:clamp(17px,1.6vw,18.5px) !important; }
-    nav ul a,.btn{ font-size:clamp(18px,2vw,20px) !important; letter-spacing:.02em; }
-    .cta h3{ font-size:clamp(24px,2.6vw,28px) !important; }
-
-    /* Opcional: hero mais equilibrado em telas grandes */
-    @media (min-width:1100px){
-      .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -177,19 +155,19 @@
           <a class="btn btn--ghost" href="#portfolio">Portfólio</a>
         </div>
       </div>
-
-      <!-- Card do herói com VÍDEO principal (looping, autoplay, sem controles) -->
       <div class="hero__card">
         <span class="badge">17 anos de experiência na construção, 6 anos dedicados à Engenharia Civil</span>
-        <video
-          class="hero__media"
-          src="assets/video_inicio.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          style="border-radius:14px; display:block; width:100%;">
+
+        <!-- VÍDEO principal (substitui a ilustração) -->
+        <video class="hero__media"
+               src="assets/engenharia.mp4"      <!-- ajuste o nome do seu arquivo se for diferente -->
+               poster="assets/engenharia.jpg"   <!-- opcional: capa -->
+               autoplay
+               muted
+               loop
+               playsinline
+               preload="metadata">
+          <source src="assets/engenharia.mp4" type="video/mp4">
           Seu navegador não suporta vídeo HTML5.
         </video>
       </div>
@@ -214,25 +192,6 @@
     <div class="container">
       <h2 class="sec__title">Projetos recentes</h2>
       <p class="sec__desc">Seleção de entregas para empresas, varejo, shoppings e edificações corporativas. Cada bloco possui um carrossel de imagens e uma breve descrição do projeto.</p>
-
-      <style>
-        .card--work{background:#fff;border:1px solid #e5e9f0;border-radius:16px;overflow:hidden;box-shadow:0 6px 18px rgba(12,27,42,.05)}
-        .slider{position:relative;aspect-ratio:16/9;background:#f2f4f7}
-        .slides{height:100%;width:100%;position:relative}
-        .slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .28s ease}
-        .slides img.active{opacity:1}
-        .ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(12,27,42,.6);color:#fff;border:none;border-radius:12px;padding:8px 10px;cursor:pointer}
-        .ctrl:hover{background:rgba(12,27,42,.8)}
-        .ctrl.prev{left:8px}
-        .ctrl.next{right:8px}
-        .dots{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;gap:6px}
-        .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);cursor:pointer}
-        .dot.active{background:#fff}
-        .work__meta{padding:14px 16px}
-        .work__title{margin:0 0 6px;color:var(--bw-navy);font-weight:700}
-        .work__desc{margin:0;color:#4a5568}
-        @media (max-width:900px){.grid6{grid-template-columns:1fr}}
-      </style>
 
       <div class="grid6">
         <!-- PROJETO 1 -->
@@ -445,21 +404,14 @@
       const dots = dotsWrap.querySelectorAll('.dot');
 
       function go(i){
-        const max = slides.length;
         slides[idx].classList.remove('active');
         dots[idx].classList.remove('active');
-        idx = (i+max)%max;
+        idx = (i+slides.length)%slides.length;
         slides[idx].classList.add('active');
         dots[idx].classList.add('active');
       }
       slider.querySelector('.prev').addEventListener('click',()=>go(idx-1));
       slider.querySelector('.next').addEventListener('click',()=>go(idx+1));
-    });
-
-    // Autoplay programático (melhora compatibilidade)
-    window.addEventListener('DOMContentLoaded', ()=>{
-      const v = document.querySelector('.hero__media');
-      if(v){ v.muted = true; v.play().catch(()=>{}); }
     });
   </script>
 </body>
