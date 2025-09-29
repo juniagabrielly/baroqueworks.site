@@ -140,6 +140,37 @@
     .cta h3{ font-size:clamp(24px,2.6vw,28px) !important; }
     @media (min-width:1100px){
       .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
+/* === Carrossel de logomarcas === */
+.clients{ margin:28px 0 6px; }
+.logo-slider{
+  position:relative; overflow:hidden;
+  border:1px solid #e5e9f0; border-radius:14px; background:#fff;
+  padding:14px 8px;
+}
+.logo-track{
+  display:flex; align-items:center; gap:42px;
+  /* a animação anda metade do conteúdo (duplicado via JS) */
+  animation:logos-scroll 28s linear infinite;
+  will-change: transform;
+}
+.logo-slider:hover .logo-track{ animation-play-state: paused; }
+.logo-track img{
+  height:48px; width:auto; flex:0 0 auto;
+  filter:grayscale(100%); opacity:.85; transition:.2s ease;
+}
+.logo-track img:hover{ filter:none; opacity:1; transform:translateY(-1px); }
+
+@keyframes logos-scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); } /* casa com a duplicação no JS */
+}
+
+@media (max-width:900px){
+  .logo-track{ gap:28px; }
+  .logo-track img{ height:40px; }
+}
+
+      
     }
   </style>
 </head>
@@ -329,6 +360,28 @@
         </article>
       </div>
 
+      <!-- Carrossel de clientes (logomarcas) -->
+<div class="clients">
+  <h3 class="sec__title" style="text-align:center">Algumas marcas atendidas</h3>
+  <p class="sec__desc" style="text-align:center">
+    Projetos e consultorias para varejo, corporativo e indústrias.
+  </p>
+
+  <div class="logo-slider" aria-label="Clientes Baroque Works">
+    <div class="logo-track" data-logo-track>
+      <!-- SUBSTITUA pelas suas logos em assets/clientes/ -->
+      <!-- Dica: 220–300px de largura e fundo transparente ficam ótimos -->
+      <img src="assets/clientes/cliente1.png" alt="Cliente 1">
+      <img src="assets/clientes/cliente2.png" alt="Cliente 2">
+      <img src="assets/clientes/cliente3.png" alt="Cliente 3">
+      <img src="assets/clientes/cliente4.png" alt="Cliente 4">
+      <img src="assets/clientes/cliente5.png" alt="Cliente 5">
+      <img src="assets/clientes/cliente6.png" alt="Cliente 6">
+    </div>
+  </div>
+</div>
+
+
       <!-- CTA destacado (retângulo azul) -->
       <div class="cta" style="margin-top:22px">
         <h3>Quer ver um case específico do seu segmento?</h3>
@@ -443,6 +496,9 @@
       slider.querySelector('.prev').addEventListener('click',()=>go(idx-1));
       slider.querySelector('.next').addEventListener('click',()=>go(idx+1));
     });
+    <a href="https://site-do-cliente.com" target="_blank" rel="noopener">
+  <img src="assets/clientes/cliente1.png" alt="Cliente 1">
+</a>
   </script>
 </body>
 </html>
