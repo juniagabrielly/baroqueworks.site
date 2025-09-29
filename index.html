@@ -140,37 +140,46 @@
     .cta h3{ font-size:clamp(24px,2.6vw,28px) !important; }
     @media (min-width:1100px){
       .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
-/* === Carrossel de logomarcas === */
-.clients{ margin:28px 0 6px; }
-.logo-slider{
-  position:relative; overflow:hidden;
-  border:1px solid #e5e9f0; border-radius:14px; background:#fff;
-  padding:14px 8px;
-}
-.logo-track{
-  display:flex; align-items:center; gap:42px;
-  /* a animação anda metade do conteúdo (duplicado via JS) */
-  animation:logos-scroll 28s linear infinite;
-  will-change: transform;
-}
-.logo-slider:hover .logo-track{ animation-play-state: paused; }
-.logo-track img{
-  height:48px; width:auto; flex:0 0 auto;
-  filter:grayscale(100%); opacity:.85; transition:.2s ease;
-}
-.logo-track img:hover{ filter:none; opacity:1; transform:translateY(-1px); }
+    }
+  </style>
 
-@keyframes logos-scroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); } /* casa com a duplicação no JS */
-}
+  <!-- === Estilos do CARROSSEL DE LOGOMARCAS (fixo, com setas) === -->
+  <style>
+    .clients{ margin:32px 0 8px; }
+    .clients .sec__title,.clients .sec__desc{ text-align:center; }
+    .logo-slider2{
+      display:flex; align-items:center; gap:10px;
+      border:1px solid #e5e9f0; border-radius:14px; background:#fff; padding:10px;
+    }
+    .logo-btn{
+      background:var(--bw-navy); color:#fff; border:none; cursor:pointer;
+      width:36px; height:36px; border-radius:10px; font-size:20px; line-height:1;
+      display:flex; align-items:center; justify-content:center;
+      transition:.2s ease; flex:0 0 auto;
+    }
+    .logo-btn[disabled]{ opacity:.4; cursor:not-allowed; }
+    .logo-btn:hover:not([disabled]){ transform:translateY(-1px); box-shadow:0 6px 14px rgba(12,27,42,.2); }
 
-@media (max-width:900px){
-  .logo-track{ gap:28px; }
-  .logo-track img{ height:40px; }
-}
+    .logo-viewport{
+      overflow:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+      scrollbar-width:thin;
+      flex:1 1 auto;
+    }
+    .logo-row{
+      display:flex; align-items:center; gap:42px; padding:6px;
+      min-width:100%;
+    }
+    .logo-row img, .logo-row a{
+      scroll-snap-align:center; flex:0 0 auto;
+    }
+    .logo-row img{
+      height:48px; width:auto; filter:grayscale(100%); opacity:.85; transition:.2s ease;
+    }
+    .logo-row img:hover{ filter:none; opacity:1; transform:translateY(-1px); }
 
-      
+    @media (max-width:900px){
+      .logo-row{ gap:28px; }
+      .logo-row img{ height:40px; }
     }
   </style>
 </head>
@@ -207,6 +216,7 @@
 
       <!-- Capa com IMAGEM (substitui o vídeo) -->
       <div class="hero__card">
+        <span class="badge">17 anos de experiência na construção, 6 anos dedicados à Engenharia Civil</span>
         <img
           src="assets/imagem_capa.jpg"
           alt="Baroque Works Engenharia – capa"
@@ -360,27 +370,28 @@
         </article>
       </div>
 
-      <!-- Carrossel de clientes (logomarcas) -->
-<div class="clients">
-  <h3 class="sec__title" style="text-align:center">Algumas marcas atendidas</h3>
-  <p class="sec__desc" style="text-align:center">
-    Projetos e consultorias para varejo, corporativo e indústrias.
-  </p>
+      <!-- ====== LOGOMARCAS (fixo com setas) – insira suas logos em assets/clientes/ ====== -->
+      <div class="clients">
+        <h3 class="sec__title">Algumas marcas atendidas</h3>
+        <p class="sec__desc">Projetos e consultorias para varejo, corporativo e indústrias.</p>
 
-  <div class="logo-slider" aria-label="Clientes Baroque Works">
-    <div class="logo-track" data-logo-track>
-      <!-- SUBSTITUA pelas suas logos em assets/clientes/ -->
-      <!-- Dica: 220–300px de largura e fundo transparente ficam ótimos -->
-      <img src="assets/clientes/cliente1.png" alt="Cliente 1">
-      <img src="assets/clientes/cliente2.png" alt="Cliente 2">
-      <img src="assets/clientes/cliente3.png" alt="Cliente 3">
-      <img src="assets/clientes/cliente4.png" alt="Cliente 4">
-      <img src="assets/clientes/cliente5.png" alt="Cliente 5">
-      <img src="assets/clientes/cliente6.png" alt="Cliente 6">
-    </div>
-  </div>
-</div>
-
+        <div class="logo-slider2" aria-label="Clientes Baroque Works">
+          <button class="logo-btn lg-prev" type="button" aria-label="Anterior">‹</button>
+          <div class="logo-viewport" data-logo-viewport>
+            <div class="logo-row">
+              <!-- Troque pelos seus arquivos reais -->
+              <img src="assets/clientes/cliente1.png" alt="Cliente 1">
+              <img src="assets/clientes/cliente2.png" alt="Cliente 2">
+              <img src="assets/clientes/cliente3.png" alt="Cliente 3">
+              <img src="assets/clientes/cliente4.png" alt="Cliente 4">
+              <img src="assets/clientes/cliente5.png" alt="Cliente 5">
+              <img src="assets/clientes/cliente6.png" alt="Cliente 6">
+              <!-- pode seguir adicionando -->
+            </div>
+          </div>
+          <button class="logo-btn lg-next" type="button" aria-label="Próxima">›</button>
+        </div>
+      </div>
 
       <!-- CTA destacado (retângulo azul) -->
       <div class="cta" style="margin-top:22px">
@@ -496,9 +507,31 @@
       slider.querySelector('.prev').addEventListener('click',()=>go(idx-1));
       slider.querySelector('.next').addEventListener('click',()=>go(idx+1));
     });
-    <a href="https://site-do-cliente.com" target="_blank" rel="noopener">
-  <img src="assets/clientes/cliente1.png" alt="Cliente 1">
-</a>
+
+    // Navegação do carrossel de LOGOMARCAS (fixo com setas)
+    (function(){
+      const viewport = document.querySelector('[data-logo-viewport]');
+      const prevBtn = document.querySelector('.lg-prev');
+      const nextBtn = document.querySelector('.lg-next');
+      if(!viewport || !prevBtn || !nextBtn) return;
+
+      function updateButtons(){
+        // Desabilita setas quando não há mais para rolar
+        const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth - 1;
+        prevBtn.disabled = viewport.scrollLeft <= 0;
+        nextBtn.disabled = viewport.scrollLeft >= maxScrollLeft;
+      }
+      function stepSize(){
+        // rola aproximadamente “uma tela” de logos
+        return Math.max(240, Math.floor(viewport.clientWidth * 0.8));
+      }
+      prevBtn.addEventListener('click', ()=> viewport.scrollBy({left: -stepSize(), behavior:'smooth'}));
+      nextBtn.addEventListener('click', ()=> viewport.scrollBy({left:  stepSize(), behavior:'smooth'}));
+      viewport.addEventListener('scroll', updateButtons);
+      window.addEventListener('resize', updateButtons);
+      // inicial
+      updateButtons();
+    })();
   </script>
 </body>
 </html>
