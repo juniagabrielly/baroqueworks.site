@@ -75,10 +75,22 @@
     .card:hover{transform:translateY(-2px)}
     .card h3,.work__title{
       font-family:'Poppins',sans-serif;font-weight:500;
-      font-size:clamp(18px,2vw,20px);line-height:1.3;margin:8px 0 8px;color:var(--bw-navy)
+      font-size:clamp(18px,2vw,20px);line-height:1.3;margin:8px 0 12px;color:var(--bw-navy)
     }
     .card p,.work__desc,.sec__desc,footer p{font-size:clamp(16px,1.4vw,18px)}
     .copyright{font-size:14px}
+
+    /* Listas de serviços (tópicos) */
+    .list{
+      margin:0; padding:0; list-style:none; display:grid; gap:10px;
+    }
+    .list li{
+      display:flex; align-items:flex-start; gap:10px;
+      color:#334155;
+    }
+    .list li::before{
+      content:"•"; color:var(--bw-gold); font-weight:800; line-height:1; margin-top:2px;
+    }
 
     /* Projetos (cards com carrossel) */
     .grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -137,7 +149,7 @@
     .card h3,.work__title{ font-size:clamp(20px,2.4vw,22px) !important; }
     .card p,.work__desc,.sec__desc,footer p{ font-size:clamp(17px,1.6vw,18.5px) !important; }
     nav ul a,.btn{ font-size:clamp(18px,2vw,20px) !important; }
-    .cta h3{ font-size:clamp(24px,2.6vw,28px) !important; }
+    .cta h3{ font size:clamp(24px,2.6vw,28px) !important; }
     @media (min-width:1100px){
       .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
     }
@@ -223,20 +235,91 @@
     </div>
   </section>
 
-  <!-- Serviços -->
+  <!-- Serviços (apenas tópicos/pontos, sem imagens) -->
   <section id="servicos">
     <div class="container">
       <h2 class="sec__title">Serviços</h2>
-      <p class="sec__desc">Projetos arquitetônicos, estruturais, elétricos, hidráulicos, fundações, contenções, drenagem, saneamento, SPDA, SPCI, CFTV, SDAI e BIM.</p>
+      <p class="sec__desc">Projetamos, compatibilizamos e gerenciamos disciplinas para empreendimentos de médio e grande porte.</p>
+
       <div class="grid3">
-        <article class="card"><h3>Arquitetura</h3><p>Soluções funcionais e estéticas para empreendimentos corporativos.</p></article>
-        <article class="card"><h3>Estruturas</h3><p>Concreto, metálica e madeira, com detalhamento executivo.</p></article>
-        <article class="card"><h3>Elétrica &amp; Sistemas</h3><p>Elétrica, SPDA, SPCI, CFTV e SDAI com foco em segurança.</p></article>
+        <article class="card">
+          <h3>Arquitetura</h3>
+          <ul class="list">
+            <li>Estudos preliminares e anteprojeto</li>
+            <li>Projeto legal e aprovação em órgãos</li>
+            <li>Projeto executivo e detalhamento</li>
+            <li>Layout corporativo e varejo</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Estruturas</h3>
+          <ul class="list">
+            <li>Concreto armado e protendido</li>
+            <li>Estruturas metálicas</li>
+            <li>Estruturas em madeira</li>
+            <li>Fundações e contenções</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Elétrica &amp; Sistemas</h3>
+          <ul class="list">
+            <li>Baixa e média tensão</li>
+            <li>SPDA e aterramento</li>
+            <li>SPCI (combate a incêndio)</li>
+            <li>CFTV, SDAI e cabeamento</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Hidrossanitário &amp; Saneamento</h3>
+          <ul class="list">
+            <li>Abastecimento de água e esgoto</li>
+            <li>Drenagem urbana</li>
+            <li>Reuso e reservação</li>
+            <li>Estações compactas</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Segurança &amp; Fire</h3>
+          <ul class="list">
+            <li>Plano de prevenção e combate</li>
+            <li>Rotas de fuga e sinalização</li>
+            <li>Pressurização de escadas</li>
+            <li>Dimensionamento de hidrantes e sprinklers</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>BIM &amp; Gestão</h3>
+          <ul class="list">
+            <li>Modelagem e coordenação BIM</li>
+            <li>Detecção de interferências (clash)</li>
+            <li>Compatibilização interdisciplinar</li>
+            <li>Memoriais e quantitativos</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Laudos &amp; Inspeções</h3>
+          <ul class="list">
+            <li>Inspeção predial e NR’s</li>
+            <li>Patologias e perícias</li>
+            <li>Vistorias técnicas</li>
+            <li>Relatórios e recomendações executivas</li>
+          </ul>
+        </article>
+
+        <!-- Espaço para manter o grid equilibrado em telas grandes -->
+        <div class="card" style="background:transparent;border:0;box-shadow:none"></div>
+        <div class="card" style="background:transparent;border:0;box-shadow:none"></div>
       </div>
     </div>
   </section>
 
-  <!-- Projetos -->
+  <!-- Projetos (COM imagens) -->
   <section id="portfolio" style="background:var(--bw-cloud);border-top:1px solid #e9edf3;border-bottom:1px solid #e9edf3">
     <div class="container">
       <h2 class="sec__title">Projetos recentes</h2>
@@ -368,7 +451,7 @@
         </article>
       </div>
 
-      <!-- ====== LOGOMARCAS (fixo com setas) – insira suas logos em assets/clientes/ ====== -->
+      <!-- ====== LOGOMARCAS (fixo com setas) – insira suas logos em assets/ ====== -->
       <div class="clients">
         <h3 class="sec__title">Algumas marcas atendidas</h3>
         <p class="sec__desc">Projetos e consultorias para varejo, corporativo e indústrias.</p>
@@ -384,7 +467,6 @@
               <img src="assets/cliente4.png" alt="Cliente 4">
               <img src="assets/cliente5.png" alt="Cliente 5">
               <img src="assets/cliente6.png" alt="Cliente 6">
-              <!-- pode seguir adicionando -->
             </div>
           </div>
           <button class="logo-btn lg-next" type="button" aria-label="Próxima">›</button>
@@ -513,20 +595,17 @@
       if(!viewport || !prevBtn || !nextBtn) return;
 
       function updateButtons(){
-        // Desabilita setas quando não há mais para rolar
         const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth - 1;
         prevBtn.disabled = viewport.scrollLeft <= 0;
         nextBtn.disabled = viewport.scrollLeft >= maxScrollLeft;
       }
       function stepSize(){
-        // rola aproximadamente “uma tela” de logos
         return Math.max(240, Math.floor(viewport.clientWidth * 0.8));
       }
       prevBtn.addEventListener('click', ()=> viewport.scrollBy({left: -stepSize(), behavior:'smooth'}));
       nextBtn.addEventListener('click', ()=> viewport.scrollBy({left:  stepSize(), behavior:'smooth'}));
       viewport.addEventListener('scroll', updateButtons);
       window.addEventListener('resize', updateButtons);
-      // inicial
       updateButtons();
     })();
   </script>
