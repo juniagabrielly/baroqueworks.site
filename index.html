@@ -26,9 +26,9 @@
       --bw-mist:#eef2f6;
       --bw-cloud:#f7f9fc;
 
-      /* Marca d’água (ajustes finos) */
-      --wm-size: 320px; /* tamanho da repetição */
-      --wm-opacity: .06; /* intensidade da marca d’água */
+      /* Marca d’água (ajustes) */
+      --wm-size: 320px;
+      --wm-opacity: .06;
     }
 
     *{ box-sizing:border-box }
@@ -52,7 +52,7 @@
       pointer-events:none;
       z-index:0;
     }
-    /* garante que o conteúdo fique acima da marca d’água */
+    /* conteúdo acima da marca d'água */
     header, main, section, footer, .container, .hero, .cta { position:relative; z-index:1; }
 
     img,video{ max-width:100%; height:auto; display:block }
@@ -71,9 +71,9 @@
     .brand { display:flex; align-items:center; gap:12px }
     .brand img{
       display:block;
-      max-height:80px; /* altura limite padrão */
-      height:auto;     /* mantém proporção */
-      width:auto;      /* evita stretch horizontal */
+      max-height:80px; /* limite padrão */
+      height:auto;
+      width:auto;
       object-fit:contain;
     }
     @media (max-width:1024px){ .brand img{ max-height:65px } }
@@ -183,8 +183,7 @@
     @media (min-width:1100px){
       .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
     }
-
-    /* opcional: marca d'água mais suave em telas pequenas */
+    /* marca d'água mais suave em telas pequenas */
     @media (max-width:600px){
       :root{ --wm-opacity:.04; }
     }
@@ -223,6 +222,60 @@
       .logo-row{ gap:28px; }
       .logo-row img{ height:40px; }
     }
+  </style>
+
+  <!-- === CSS do MODAL de Política de Privacidade === -->
+  <style>
+    /* Botão com cara de link */
+    .linklike{
+      background:none; border:none; padding:0; margin:0;
+      font: inherit; color:var(--bw-navy); cursor:pointer; text-decoration:underline;
+    }
+
+    /* Backdrop */
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(0,0,0,.48);
+      z-index:1000;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:auto 0 0 0;
+      margin:auto; max-width:min(920px,94%); max-height:84vh;
+      background:#fff; border-radius:18px; border:1px solid #e8edf4;
+      box-shadow:0 20px 60px rgba(12,27,42,.25);
+      display:flex; flex-direction:column; overflow:hidden; z-index:1001;
+      top:50%; transform:translateY(-50%); /* centralizado */
+    }
+    .modal__header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 18px; border-bottom:1px solid #eef2f6; background:#f9fbff;
+    }
+    .modal__header h2{
+      margin:0; font-family:'Montserrat',sans-serif; font-weight:700; color:#0C1B2A; font-size:clamp(18px,2.4vw,22px);
+    }
+    .modal__close{
+      background:#0C1B2A; color:#fff; border:none; width:36px; height:36px; border-radius:10px; font-size:20px; cursor:pointer;
+    }
+    .modal__body{
+      padding:18px; overflow:auto;
+    }
+    .modal__body h3{
+      font-family:'Montserrat',sans-serif; color:#0C1B2A; margin:22px 0 8px; font-size:clamp(16px,2.2vw,20px);
+    }
+    .modal__body p, .modal__body li{
+      font-size:clamp(15px,1.8vw,17px); color:#344054;
+    }
+    .modal__footer{
+      padding:12px 18px; border-top:1px solid #eef2f6; display:flex; justify-content:flex-end; gap:10px;
+    }
+
+    @media (max-width:640px){
+      .modal{ max-height:90vh; border-radius:16px; }
+    }
+
+    /* utilitário de mostrar/ocultar */
+    [hidden]{ display:none !important; }
   </style>
 </head>
 <body>
@@ -393,7 +446,7 @@
       <div style="margin-top:0;padding:20px 0;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;border-top:1px solid #e5e9f2">
         <a href="tel:+5537998653393">Telefone: (37) 9 9865-3393</a>
         <a href="mailto:comercial@baroqueworks.com.br">Email</a>
-        <a href="docs/politica-privacidade.pdf" target="_blank">Política de Privacidade</a>
+        <button type="button" class="linklike" id="open-privacy">Política de Privacidade</button>
       </div>
     </div>
   </section>
@@ -446,11 +499,82 @@ Acreditamos que engenharia é construir com propósito, responsabilidade e preci
         <div>
           <h4>Contato</h4>
           <p>comercial@baroqueworks.com.br<br>BH • Minas Gerais</p>
+          <p><button type="button" class="linklike" id="open-privacy-2">Política de Privacidade</button></p>
         </div>
       </div>
       <div class="copyright">© <span id="year"></span> Baroque Works Engenharia. Todos os direitos reservados.</div>
     </div>
   </footer>
+
+  <!-- ========= MODAL de Política de Privacidade (embutido) ========= -->
+  <div class="modal-backdrop" data-privacy-backdrop hidden></div>
+
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title" aria-describedby="privacy-content" data-privacy-modal hidden>
+    <div class="modal__header">
+      <h2 id="privacy-title" tabindex="-1">Política de Privacidade – Baroque Works Engenharia</h2>
+      <button type="button" class="modal__close" aria-label="Fechar" data-privacy-close>×</button>
+    </div>
+    <div class="modal__body" id="privacy-content">
+      <p>A <strong>Baroque Works Engenharia</strong> respeita a sua privacidade e se compromete com a proteção dos seus dados pessoais. Esta Política explica, de forma simples e transparente, como coletamos, usamos e protegemos informações quando você utiliza nosso site <strong>baroqueworks.com.br</strong>.</p>
+
+      <h3>1) Quem somos</h3>
+      <p>Baroque Works Engenharia (“<strong>nós</strong>”), empresa brasileira detentora do domínio <strong>baroqueworks.com.br</strong>, regularmente registrado no <strong>Registro.br</strong>.<br>
+      Contato oficial: <a href="mailto:contato@baroqueworks.com.br">contato@baroqueworks.com.br</a>.</p>
+
+      <h3>2) Quais dados coletamos</h3>
+      <ul>
+        <li><strong>Dados informados por você:</strong> nome, e-mail, telefone e mensagem enviados por formulário, e-mail ou WhatsApp.</li>
+        <li><strong>Dados de navegação (cookies/analytics):</strong> páginas acessadas, tempo de visita e informações técnicas do dispositivo/navegador, <em>sem identificação direta do usuário</em>, para entender o uso do site e melhorar a experiência.</li>
+      </ul>
+      <p>Você pode gerenciar cookies nas configurações do seu navegador. Se preferir, use a navegação anônima/privada.</p>
+
+      <h3>3) Para que usamos seus dados</h3>
+      <ul>
+        <li>Responder suas solicitações de contato e orçamento;</li>
+        <li>Melhorar conteúdo, usabilidade e segurança do site;</li>
+        <li>Cumprir obrigações legais ou regulatórias, quando necessário.</li>
+      </ul>
+
+      <h3>4) Compartilhamento de dados</h3>
+      <p><strong>Não vendemos nem alugamos</strong> dados pessoais. Compartilhamos apenas quando:</p>
+      <ul>
+        <li>exigido por lei/autoridade competente; ou</li>
+        <li>com fornecedores que nos apoiam no site/infraestrutura (por exemplo, hospedagem), sempre sob dever de confidencialidade e segurança.</li>
+      </ul>
+
+      <h3>5) Base legal</h3>
+      <p>Tratamos dados com fundamento na <strong>LGPD (Lei 13.709/2018)</strong>, principalmente pelas bases: <strong>consentimento</strong>, <strong>legítimo interesse</strong> (melhoria do site) e <strong>execução de procedimentos preliminares a contrato</strong> (responder pedidos de orçamento/contato).</p>
+
+      <h3>6) Segurança</h3>
+      <p>Adotamos medidas técnicas e administrativas para proteger os dados contra acessos não autorizados, perda, alteração ou divulgação indevida.</p>
+
+      <h3>7) Seus direitos (LGPD)</h3>
+      <p>Você pode, a qualquer momento:</p>
+      <ul>
+        <li>solicitar <strong>confirmação</strong> e <strong>acesso</strong> aos dados;</li>
+        <li>pedir <strong>correção</strong> ou <strong>exclusão</strong>;</li>
+        <li><strong>revogar consentimento</strong>;</li>
+        <li>solicitar <strong>portabilidade</strong> quando aplicável;</li>
+        <li>questionar a forma e a finalidade do tratamento.</li>
+      </ul>
+      <p>Para exercer direitos, escreva para <a href="mailto:contato@baroqueworks.com.br">contato@baroqueworks.com.br</a>.</p>
+
+      <h3>8) Retenção</h3>
+      <p>Mantemos os dados somente pelo tempo necessário ao propósito informado (ex.: atendimento do contato) e/ou conforme exigências legais.</p>
+
+      <h3>9) Links externos</h3>
+      <p>Nosso site pode conter links para sites de terceiros. Não temos controle sobre o conteúdo e práticas desses sites e não nos responsabilizamos por suas políticas de privacidade.</p>
+
+      <h3>10) Atualizações desta Política</h3>
+      <p>Esta Política pode ser atualizada para refletir melhorias, mudanças legais ou técnicas. A versão vigente será sempre publicada nesta página, com a data de revisão.</p>
+
+      <p><strong>Última atualização:</strong> 11/10/2025</p>
+    </div>
+    <div class="modal__footer">
+      <button type="button" class="btn btn--primary" data-privacy-close>Fechar</button>
+    </div>
+  </div>
+  <!-- ========= /MODAL ========= -->
 
   <!-- Scripts -->
   <script>
@@ -490,6 +614,48 @@ Acreditamos que engenharia é construir com propósito, responsabilidade e preci
       viewport.addEventListener('scroll', updateButtons);
       window.addEventListener('resize', updateButtons);
       updateButtons();
+    })();
+
+    // ===== Modal de Política de Privacidade =====
+    (function(){
+      const openers = [
+        document.getElementById('open-privacy'),
+        document.getElementById('open-privacy-2') // botão no footer
+      ].filter(Boolean);
+
+      const modal    = document.querySelector('[data-privacy-modal]');
+      const backdrop = document.querySelector('[data-privacy-backdrop]');
+      const closers  = modal ? modal.querySelectorAll('[data-privacy-close]') : [];
+
+      if(!modal || !backdrop || openers.length === 0) return;
+
+      const body = document.body;
+      let lastFocused = null;
+
+      function openModal(){
+        lastFocused = document.activeElement;
+        backdrop.hidden = false;
+        modal.hidden = false;
+        body.style.overflow = 'hidden'; // trava rolagem do fundo
+        const title = modal.querySelector('#privacy-title');
+        if(title) title.focus({preventScroll:true});
+      }
+
+      function closeModal(){
+        backdrop.hidden = true;
+        modal.hidden = true;
+        body.style.overflow = '';
+        if(lastFocused && typeof lastFocused.focus === 'function'){
+          lastFocused.focus();
+        }
+      }
+
+      openers.forEach(btn => btn.addEventListener('click', openModal));
+      closers.forEach(btn => btn.addEventListener('click', closeModal));
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && !modal.hidden) closeModal();
+      });
     })();
   </script>
 </body>
