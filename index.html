@@ -25,107 +25,154 @@
       --bw-ink:#0b0f14;
       --bw-mist:#eef2f6;
       --bw-cloud:#f7f9fc;
+
+      /* Marca d’água (ajustes finos) */
+      --wm-size: 320px; /* tamanho da repetição */
+      --wm-opacity: .06; /* intensidade da marca d’água */
     }
-    *{box-sizing:border-box}
-    html{font-size:16px}
+
+    *{ box-sizing:border-box }
+
+    html{ font-size:16px }
     html,body{
-      margin:0;padding:0;background:#fff;color:var(--bw-ink);
+      margin:0; padding:0; background:#fff; color:var(--bw-ink);
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
-      font-weight:400;line-height:1.6;min-height:100%
+      font-weight:400; line-height:1.6; min-height:100%;
+      position:relative; z-index:0;
     }
-    img,video{max-width:100%;height:auto;display:block}
-    a{color:inherit;text-decoration:none}
-    .container{width:min(1120px,92%);margin-inline:auto}
 
-    header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #e5e9f2}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    /* === Marca d’água em grade (fundo do site) === */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:url("assets/marca_dagua.png");
+      background-repeat:repeat;
+      background-size:var(--wm-size) auto;
+      opacity:var(--wm-opacity);
+      pointer-events:none;
+      z-index:0;
+    }
+    /* garante que o conteúdo fique acima da marca d’água */
+    header, main, section, footer, .container, .hero, .cta { position:relative; z-index:1; }
 
-    /* ===== LOGO RESPONSIVA (não distorce) ===== */
-    .brand{display:flex;align-items:center;min-width:0}
+    img,video{ max-width:100%; height:auto; display:block }
+    a{ color:inherit; text-decoration:none }
+    .container{ width:min(1120px,92%); margin-inline:auto }
+
+    header{
+      position:sticky; top:0; z-index:40;
+      background:rgba(255,255,255,.9);
+      backdrop-filter:saturate(180%) blur(8px);
+      border-bottom:1px solid #e5e9f2;
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+
+    /* Logo responsiva (mantém proporção, sem esticar) */
+    .brand { display:flex; align-items:center; gap:12px }
     .brand img{
-      width:auto;           /* mantém proporção natural */
-      height:auto;          /* mantém proporção natural */
-      max-height:72px;      /* altura máxima padrão (desktop) */
       display:block;
+      max-height:80px; /* altura limite padrão */
+      height:auto;     /* mantém proporção */
+      width:auto;      /* evita stretch horizontal */
+      object-fit:contain;
     }
-    @media (max-width:1024px){ .brand img{ max-height:60px; } }
-    @media (max-width:600px){  .brand img{ max-height:48px; } }
+    @media (max-width:1024px){ .brand img{ max-height:65px } }
+    @media (max-width:600px){ .brand img{ max-height:55px } }
 
-    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav ul{ display:flex; gap:18px; list-style:none; margin:0; padding:0 }
 
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;border:1px solid transparent;font-weight:600;transition:.2s ease}
-    .btn--primary{background:var(--bw-navy);color:#fff}
-    .btn--primary:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(12,27,42,.18)}
-    .btn--ghost{border-color:var(--bw-navy)}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 18px; border-radius:14px; border:1px solid transparent;
+      font-weight:600; transition:.2s ease;
+    }
+    .btn--primary{ background:var(--bw-navy); color:#fff }
+    .btn--primary:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(12,27,42,.18) }
+    .btn--ghost{ border-color:var(--bw-navy) }
 
-    .hero{background:linear-gradient(180deg,var(--bw-cloud),#fff);padding:72px 0 40px;border-bottom:1px solid #eef2f6}
-    .hero__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+    .hero{
+      background:linear-gradient(180deg,var(--bw-cloud),#fff);
+      padding:72px 0 40px; border-bottom:1px solid #eef2f6
+    }
+    .hero__grid{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:32px; align-items:center
+    }
 
-    /* Tipografia conforme guia */
+    /* Tipografia */
     .eyebrow{
-      font-family:'Montserrat',sans-serif;font-weight:600;
-      font-size:14px;letter-spacing:.12em;color:var(--bw-gold);text-transform:uppercase
+      font-family:'Montserrat',sans-serif; font-weight:600;
+      font-size:14px; letter-spacing:.12em; color:var(--bw-gold); text-transform:uppercase
     }
     .h1{
-      font-family:'Montserrat',sans-serif;font-weight:800;
-      font-size:clamp(28px,3vw,32px);line-height:1.15;margin:.35em 0;color:var(--bw-navy)
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:clamp(28px,3vw,32px); line-height:1.15; margin:.35em 0; color:var(--bw-navy)
     }
-    .lead{font-size:clamp(17px,1.6vw,18px);color:#344054}
+    .lead{ font-size:clamp(17px,1.6vw,18px); color:#344054 }
 
-    section{padding:60px 0;scroll-margin-top:88px}
+    section{ padding:60px 0; scroll-margin-top:88px }
     .sec__title{
-      font-family:'Montserrat',sans-serif;font-weight:700;
-      font-size:clamp(22px,2.4vw,26px);line-height:1.25;margin:0 0 14px;color:var(--bw-navy)
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:clamp(22px,2.4vw,26px); line-height:1.25; margin:0 0 14px; color:var(--bw-navy)
     }
-    .sec__desc{color:#475467;margin:0 0 26px}
+    .sec__desc{ color:#475467; margin:0 0 26px }
 
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .card{background:#fff;border:1px solid #e5e9f0;border-radius:18px;padding:22px;box-shadow:0 6px 18px rgba(12,27,42,.05);transition:.2s}
-    .card:hover{transform:translateY(-2px)}
-    .card h3{
-      font-family:'Poppins',sans-serif;font-weight:500;
-      font-size:clamp(18px,2vw,20px);line-height:1.3;margin:8px 0 12px;color:var(--bw-navy)
+    .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px }
+    .card{
+      background:#fff; border:1px solid #e5e9f0; border-radius:18px;
+      padding:22px; box-shadow:0 6px 18px rgba(12,27,42,.05); transition:.2s
     }
-    .card p,.sec__desc,footer p{font-size:clamp(16px,1.4vw,18px)}
-    .copyright{font-size:14px}
+    .card:hover{ transform:translateY(-2px) }
+    .card h3{
+      font-family:'Poppins',sans-serif; font-weight:500;
+      font-size:clamp(18px,2vw,20px); line-height:1.3; margin:8px 0 12px; color:var(--bw-navy)
+    }
+    .card p,.sec__desc,footer p{ font-size:clamp(16px,1.4vw,18px) }
+    .copyright{ font-size:14px }
 
     /* Listas de serviços (tópicos) */
-    .list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-    .list li{display:flex;align-items:flex-start;gap:10px;color:#334155}
-    .list li::before{content:"•";color:var(--bw-gold);font-weight:800;line-height:1;margin-top:2px}
+    .list{ margin:0; padding:0; list-style:none; display:grid; gap:10px }
+    .list li{ display:flex; align-items:flex-start; gap:10px; color:#334155 }
+    .list li::before{ content:"•"; color:var(--bw-gold); font-weight:800; line-height:1; margin-top:2px }
 
     /* Botões e menus */
     nav ul a,.btn{
-      font-family:'Montserrat',sans-serif;font-weight:600;
-      font-size:clamp(16px,1.6vw,18px);letter-spacing:.02em;text-transform:none
+      font-family:'Montserrat',sans-serif; font-weight:600;
+      font-size:clamp(16px,1.6vw,18px); letter-spacing:.02em; text-transform:none
     }
 
     /* CTA */
-    .cta{background:linear-gradient(180deg,var(--bw-navy),#091525);color:#fff;border-radius:22px;padding:28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .cta h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(20px,2.2vw,24px);margin:0}
+    .cta{
+      background:linear-gradient(180deg,var(--bw-navy),#091525);
+      color:#fff; border-radius:22px; padding:28px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px
+    }
+    .cta h3{
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:clamp(20px,2.2vw,24px); margin:0
+    }
 
-    footer{background:#0A1420;color:#c9d2e3;padding:36px 0;margin-top:40px}
-    .foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}
-    .foot h4{margin:0 0 10px;font-size:16px;color:#eef2f9}
-    .foot a{color:#d8e0ef}
-
-    .watermark{position:fixed;bottom:20px;right:20px;opacity:0.06;z-index:0;pointer-events:none}
-    .watermark img{height:140px}
+    footer{ background:#0A1420; color:#c9d2e3; padding:36px 0; margin-top:40px }
+    .foot{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:28px }
+    .foot h4{ margin:0 0 10px; font-size:16px; color:#eef2f9 }
+    .foot a{ color:#d8e0ef }
 
     @media (max-width:900px){
-      .hero__grid{grid-template-columns:1fr}
-      .grid3{grid-template-columns:1fr}
-      .foot{grid-template-columns:1fr}
-      nav ul{display:none}
-      .cta{flex-direction:column;align-items:flex-start}
+      .hero__grid{ grid-template-columns:1fr }
+      .grid3{ grid-template-columns:1fr }
+      .foot{ grid-template-columns:1fr }
+      nav ul{ display:none }
+      .cta{ flex-direction:column; align-items:flex-start }
     }
   </style>
 
-  <!-- === OVERRIDES – Layout grande (container/tipos) (sem mexer na logo) === -->
+  <!-- === OVERRIDES – Layout grande (container/logo/tipos) === -->
   <style>
     .container{ width:min(1280px,94%) !important; }
+    .brand img{ max-height:96px !important; }
+    @media (max-width:1024px){ .brand img{ max-height:80px !important; } }
+    @media (max-width:600px){ .brand img{ max-height:64px !important; } }
     section{ padding:72px 0 !important; }
-    html{ font-size:17.5px; }
+    html{ font-size:17.5px; } /* aumenta “tudo” um pouco */
     .lead{ font-size:clamp(18px,1.9vw,19px) !important; }
     .h1{ font-size:clamp(34px,4.2vw,40px) !important; line-height:1.12 !important; }
     .sec__title{ font-size:clamp(26px,3.2vw,32px) !important; }
@@ -136,9 +183,14 @@
     @media (min-width:1100px){
       .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
     }
+
+    /* opcional: marca d'água mais suave em telas pequenas */
+    @media (max-width:600px){
+      :root{ --wm-opacity:.04; }
+    }
   </style>
 
-  <!-- === Estilos do CARROSSEL DE LOGOMARCAS (fixo, com setas) === -->
+  <!-- === Estilos do BLOCO DE LOGOMARCAS (fixo, com setas) === -->
   <style>
     .clients .sec__title,.clients .sec__desc{ text-align:center; }
     .logo-slider2{
@@ -156,16 +208,12 @@
 
     .logo-viewport{
       overflow:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-      scrollbar-width:thin;
-      flex:1 1 auto;
+      scrollbar-width:thin; flex:1 1 auto;
     }
     .logo-row{
-      display:flex; align-items:center; gap:42px; padding:6px;
-      min-width:100%;
+      display:flex; align-items:center; gap:42px; padding:6px; min-width:100%;
     }
-    .logo-row img, .logo-row a{
-      scroll-snap-align:center; flex:0 0 auto;
-    }
+    .logo-row img, .logo-row a{ scroll-snap-align:center; flex:0 0 auto; }
     .logo-row img{
       height:48px; width:auto; filter:grayscale(100%); opacity:.85; transition:.2s ease;
     }
@@ -217,7 +265,7 @@
     </div>
   </section>
 
-  <!-- Serviços (tópicos, sem imagens) -->
+  <!-- Serviços (tópicos/pontos) -->
   <section id="servicos">
     <div class="container">
       <h2 class="sec__title">Serviços</h2>
@@ -249,8 +297,8 @@
           <ul class="list">
             <li>Baixa e média tensão</li>
             <li>SPDA e aterramento</li>
-            <li>Dados e voz (cabeamento estruturado)</li>
-            <li>CFTV</li>
+            <li>Dados e voz (Cabeamento Estruturado)</li>
+            <li>CFTV e cabeamento</li>
             <li>SDAI</li>
           </ul>
         </article>
@@ -303,7 +351,7 @@
     </div>
   </section>
 
-  <!-- CLIENTES (logos) -->
+  <!-- CLIENTES (logos) – mesma largura do container dos serviços -->
   <section id="clientes">
     <div class="container">
       <div class="clients">
@@ -329,7 +377,7 @@
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- CTA – mesma largura do container -->
   <section id="cta">
     <div class="container">
       <div class="cta">
@@ -339,7 +387,7 @@
     </div>
   </section>
 
-  <!-- Links -->
+  <!-- Links – mesma largura do container -->
   <section id="links">
     <div class="container">
       <div style="margin-top:0;padding:20px 0;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;border-top:1px solid #e5e9f2">
@@ -378,7 +426,7 @@
       <div class="foot">
         <div>
           <div class="brand" style="margin-bottom:10px">
-            <img src="assets/logo-horizontal.png" alt="Baroque Works Engenharia" style="width:auto;height:auto;max-height:40px" />
+            <img src="assets/logo-horizontal.png" alt="Baroque Works Engenharia" style="max-height:50px;height:auto;width:auto;object-fit:contain" />
           </div>
           <p>Excelência e inovação em projetos de Engenharia Civil para grandes empreendimentos.</p>
         </div>
@@ -398,15 +446,10 @@
     </div>
   </footer>
 
-  <!-- Marca d’água -->
-  <div class="watermark">
-    <img src="assets/simbolo.png" alt="Marca d'água Baroque Works" />
-  </div>
-
   <!-- Scripts -->
   <script>
     // Atualiza ano
-    const yEl=document.getElementById('year'); if(yEl){ yEl.textContent = new Date().getFullYear(); }
+    const yEl = document.getElementById('year'); if(yEl){ yEl.textContent = new Date().getFullYear(); }
 
     // Rolagem suave com compensação do header fixo
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -433,7 +476,9 @@
         prevBtn.disabled = viewport.scrollLeft <= 0;
         nextBtn.disabled = viewport.scrollLeft >= maxScrollLeft;
       }
-      function stepSize(){ return Math.max(240, Math.floor(viewport.clientWidth * 0.8)); }
+      function stepSize(){
+        return Math.max(240, Math.floor(viewport.clientWidth * 0.8));
+      }
       prevBtn.addEventListener('click', ()=> viewport.scrollBy({left: -stepSize(), behavior:'smooth'}));
       nextBtn.addEventListener('click', ()=> viewport.scrollBy({left:  stepSize(), behavior:'smooth'}));
       viewport.addEventListener('scroll', updateButtons);
