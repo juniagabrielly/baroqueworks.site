@@ -39,9 +39,18 @@
 
     header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #e5e9f2}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand img{height:80px}
-    @media (max-width:1024px){.brand img{height:65px}}
-    @media (max-width:600px){.brand img{height:55px}}
+
+    /* ===== LOGO RESPONSIVA (não distorce) ===== */
+    .brand{display:flex;align-items:center;min-width:0}
+    .brand img{
+      width:auto;           /* mantém proporção natural */
+      height:auto;          /* mantém proporção natural */
+      max-height:72px;      /* altura máxima padrão (desktop) */
+      display:block;
+    }
+    @media (max-width:1024px){ .brand img{ max-height:60px; } }
+    @media (max-width:600px){  .brand img{ max-height:48px; } }
+
     nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
 
     .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;border:1px solid transparent;font-weight:600;transition:.2s ease}
@@ -112,14 +121,11 @@
     }
   </style>
 
-  <!-- === OVERRIDES – Layout grande (container/logo/tipos) === -->
+  <!-- === OVERRIDES – Layout grande (container/tipos) (sem mexer na logo) === -->
   <style>
     .container{ width:min(1280px,94%) !important; }
-    .brand img{ height:96px !important; }
-    @media (max-width:1024px){ .brand img{ height:80px !important; } }
-    @media (max-width:600px){ .brand img{ height:64px !important; } }
     section{ padding:72px 0 !important; }
-    html{ font-size:17.5px; } /* aumenta “tudo” um pouco */
+    html{ font-size:17.5px; }
     .lead{ font-size:clamp(18px,1.9vw,19px) !important; }
     .h1{ font-size:clamp(34px,4.2vw,40px) !important; line-height:1.12 !important; }
     .sec__title{ font-size:clamp(26px,3.2vw,32px) !important; }
@@ -201,7 +207,7 @@
           <a class="btn btn--ghost" href="#clientes">Nossos clientes</a>
         </div>
       </div>
-      <!-- Capa com IMAGEM (substitui o vídeo) -->
+      <!-- Capa com IMAGEM -->
       <div class="hero__card">
         <img
           src="assets/projeto_capa.jpg"
@@ -211,7 +217,7 @@
     </div>
   </section>
 
-  <!-- Serviços (apenas tópicos/pontos, sem imagens) -->
+  <!-- Serviços (tópicos, sem imagens) -->
   <section id="servicos">
     <div class="container">
       <h2 class="sec__title">Serviços</h2>
@@ -243,8 +249,8 @@
           <ul class="list">
             <li>Baixa e média tensão</li>
             <li>SPDA e aterramento</li>
-            <li>Dados e voz (Cabeamento Estruturado)</li>
-            <li>CFTV e cabeamento</li>
+            <li>Dados e voz (cabeamento estruturado)</li>
+            <li>CFTV</li>
             <li>SDAI</li>
           </ul>
         </article>
@@ -297,7 +303,7 @@
     </div>
   </section>
 
-  <!-- CLIENTES (logos) – mesma largura do container dos serviços -->
+  <!-- CLIENTES (logos) -->
   <section id="clientes">
     <div class="container">
       <div class="clients">
@@ -323,7 +329,7 @@
     </div>
   </section>
 
-  <!-- CTA – mesma largura do container -->
+  <!-- CTA -->
   <section id="cta">
     <div class="container">
       <div class="cta">
@@ -333,7 +339,7 @@
     </div>
   </section>
 
-  <!-- Links – mesma largura do container -->
+  <!-- Links -->
   <section id="links">
     <div class="container">
       <div style="margin-top:0;padding:20px 0;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;border-top:1px solid #e5e9f2">
@@ -372,7 +378,7 @@
       <div class="foot">
         <div>
           <div class="brand" style="margin-bottom:10px">
-            <img src="assets/logo-horizontal.png" alt="Baroque Works Engenharia" style="height:50px" />
+            <img src="assets/logo-horizontal.png" alt="Baroque Works Engenharia" style="width:auto;height:auto;max-height:40px" />
           </div>
           <p>Excelência e inovação em projetos de Engenharia Civil para grandes empreendimentos.</p>
         </div>
@@ -427,9 +433,7 @@
         prevBtn.disabled = viewport.scrollLeft <= 0;
         nextBtn.disabled = viewport.scrollLeft >= maxScrollLeft;
       }
-      function stepSize(){
-        return Math.max(240, Math.floor(viewport.clientWidth * 0.8));
-      }
+      function stepSize(){ return Math.max(240, Math.floor(viewport.clientWidth * 0.8)); }
       prevBtn.addEventListener('click', ()=> viewport.scrollBy({left: -stepSize(), behavior:'smooth'}));
       nextBtn.addEventListener('click', ()=> viewport.scrollBy({left:  stepSize(), behavior:'smooth'}));
       viewport.addEventListener('scroll', updateButtons);
