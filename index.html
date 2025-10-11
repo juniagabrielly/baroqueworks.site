@@ -41,7 +41,9 @@
       position:relative; z-index:0;
     }
 
-    /* === Marca d’água em grade (fundo do site) === */
+    /* === Marca d’água em grade (fundo do site TODO) ===
+       Se o grid ficar forte quando somado ao grid do #sobre,
+       você pode comentar este bloco body::before. */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -277,6 +279,32 @@
     /* utilitário de mostrar/ocultar */
     [hidden]{ display:none !important; }
   </style>
+
+  <!-- === CSS do SOBRE centralizado + grid de fundo somente nessa seção === -->
+  <style>
+    #sobre{
+      position: relative;
+      text-align: center;      /* centraliza título e parágrafos */
+      overflow: hidden;
+      background:#fff;         /* garante contraste sobre o grid */
+    }
+    #sobre .container{
+      position: relative;
+      z-index: 1;
+      max-width: 900px;        /* largura ótima de leitura */
+    }
+    /* Grid clarinho no fundo do SOBRE (sem alterar o tom do arquivo) */
+    #sobre::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:url("assets/marca_dagua.png"); /* seu grid claro */
+      background-repeat:repeat;
+      background-size:320px auto; /* ajuste se quiser maior/menor */
+      /* sem opacity: usamos o tom do arquivo original, como você pediu */
+      pointer-events:none;
+      z-index:0;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -451,7 +479,7 @@
     </div>
   </section>
 
-  <!-- Sobre -->
+  <!-- Sobre (centralizado + grid de fundo só aqui) -->
   <section id="sobre">
     <div class="container">
       <h2 class="sec__title">Sobre</h2>
@@ -519,7 +547,7 @@ Acreditamos que engenharia é construir com propósito, responsabilidade e preci
 
       <h3>1) Quem somos</h3>
       <p>Baroque Works Engenharia (“<strong>nós</strong>”), empresa brasileira detentora do domínio <strong>baroqueworks.com.br</strong>, regularmente registrado no <strong>Registro.br</strong>.<br>
-      Contato oficial: <a href="mailto:comercial@baroqueworks.com.br">comercial@baroqueworks.com.br</a>.</p>
+      Contato oficial: <a href="mailto:contato@baroqueworks.com.br">contato@baroqueworks.com.br</a>.</p>
 
       <h3>2) Quais dados coletamos</h3>
       <ul>
@@ -539,7 +567,7 @@ Acreditamos que engenharia é construir com propósito, responsabilidade e preci
       <p><strong>Não vendemos nem alugamos</strong> dados pessoais. Compartilhamos apenas quando:</p>
       <ul>
         <li>exigido por lei/autoridade competente; ou</li>
-        <li>com fornecedores que nos apoiam no site/infraestrutura (por exemplo, hospedagem), sempre sob dever de confidencialidade e segurança.</li>
+        <li> com fornecedores que nos apoiam no site/infraestrutura (por exemplo, hospedagem), sempre sob dever de confidencialidade e segurança.</li>
       </ul>
 
       <h3>5) Base legal</h3>
@@ -557,7 +585,7 @@ Acreditamos que engenharia é construir com propósito, responsabilidade e preci
         <li>solicitar <strong>portabilidade</strong> quando aplicável;</li>
         <li>questionar a forma e a finalidade do tratamento.</li>
       </ul>
-      <p>Para exercer direitos, escreva para <a href="mailto:comercialbaroqueworks.com.br">comercial@baroqueworks.com.br</a>.</p>
+      <p>Para exercer direitos, escreva para <a href="mailto:contato@baroqueworks.com.br">contato@baroqueworks.com.br</a>.</p>
 
       <h3>8) Retenção</h3>
       <p>Mantemos os dados somente pelo tempo necessário ao propósito informado (ex.: atendimento do contato) e/ou conforme exigências legais.</p>
