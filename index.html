@@ -178,7 +178,6 @@
     .lead{ font-size:clamp(18px,1.9vw,19px) !important; }
     .h1{ font-size:clamp(34px,4.2vw,40px) !important; line-height:1.12 !important; }
     .sec__title{ font-size:clamp(26px,3.2vw,32px) !important; }
-    .card h3{ font-size:clamp(20px,2.4vw,22px) !important; }
     .card p,.sec__desc,footer p{ font-size:clamp(17px,1.6vw,18.5px) !important; }
     nav ul a,.btn{ font-size:clamp(18px,2vw,20px) !important; }
     .cta h3{ font-size:clamp(24px,2.6vw,28px) !important; }
@@ -284,25 +283,31 @@
   <style>
     #sobre{
       position: relative;
-      text-align: center;      /* centraliza título e parágrafos */
+      text-align: center;
       overflow: hidden;
-      background:#fff;         /* garante contraste sobre o grid */
+      background:#fff;
     }
     #sobre .container{
       position: relative;
       z-index: 1;
-      max-width: 900px;        /* largura ótima de leitura */
+      max-width: 900px;
     }
-    /* Grid clarinho no fundo do SOBRE (sem alterar o tom do arquivo) */
+    /* Grid clarinho no fundo do SOBRE */
     #sobre::before{
       content:"";
       position:absolute; inset:0;
-      background-image:url("assets/marca_dagua.png"); /* seu grid claro */
+      background-image:url("assets/marca_dagua.png");
       background-repeat:repeat;
-      background-size:320px auto; /* ajuste se quiser maior/menor */
-      /* sem opacity: usamos o tom do arquivo original, como você pediu */
+      background-size:320px auto;
       pointer-events:none;
       z-index:0;
+    }
+    /* Tipografia maior e mais espaçada só no SOBRE */
+    #sobre .sec__desc{
+      font-size:clamp(18.5px,2.1vw,21px); /* maior que o padrão */
+      line-height:1.9;                     /* mais respiro entre linhas */
+      margin:0 0 18px;                     /* espaçamento entre parágrafos */
+      color:#344054;
     }
   </style>
 </head>
@@ -483,15 +488,12 @@
   <section id="sobre">
     <div class="container">
       <h2 class="sec__title">Sobre</h2>
-      <p class="sec__desc">A Baroque Works Engenharia nasceu com o propósito de unir precisão técnica, tecnologia e visão estratégica para entregar soluções completas e confiáveis em engenharia.
-Cada projeto é conduzido com rigor técnico, responsabilidade e compromisso com resultados eficientes e sustentáveis.
 
-Com sólida experiência prática em obras e no desenvolvimento de projetos estruturais, elétricos, hidráulicos, de fundações, contenções, drenagem, saneamento e modelagem BIM, a empresa se apoia em tecnologia e processos de excelência para garantir qualidade do planejamento à execução.
+      <p class="sec__desc">A Baroque Works Engenharia nasceu com o propósito de unir precisão técnica, tecnologia e visão estratégica para entregar soluções completas e confiáveis em engenharia. Cada projeto é conduzido com rigor técnico, responsabilidade e compromisso com resultados eficientes e sustentáveis.</p>
 
-A Baroque Works Engenharia valoriza parcerias sólidas e duradouras com seus clientes, oferecendo atendimento personalizado, transparência e comprometimento em cada entrega.
-Mais do que executar projetos, buscamos construir confiança, aprimorar processos e agregar valor real.
+      <p class="sec__desc">Com sólida experiência prática em obras e no desenvolvimento de projetos estruturais, elétricos, hidráulicos, de fundações, contenções, drenagem, saneamento e modelagem BIM, a empresa se apoia em tecnologia e processos de excelência para garantir qualidade do planejamento à execução.</p>
 
-Acreditamos que engenharia é construir com propósito, responsabilidade e precisão, transformando desafios em resultados e contribuindo para o desenvolvimento de um futuro mais sólido e eficiente.</p>
+      <p class="sec__desc">A Baroque Works Engenharia valoriza parcerias sólidas e duradouras com seus clientes, oferecendo atendimento personalizado, transparência e comprometimento em cada entrega. Acreditamos que engenharia é construir com propósito, responsabilidade e precisão, transformando desafios em resultados e contribuindo para o desenvolvimento de um futuro mais sólido e eficiente.</p>
     </div>
   </section>
 
@@ -688,3 +690,4 @@ Acreditamos que engenharia é construir com propósito, responsabilidade e preci
   </script>
 </body>
 </html>
+
