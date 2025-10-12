@@ -3,17 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Baroque Works Engenharia</title>
   <meta name="description" content="Projetos completos em Arquitetura e Engenharia: estrutural, elétrico, hidráulico, fundações, contenções, drenagem, saneamento, BIM e inspeções técnicas." />
   <meta name="robots" content="index,follow" />
+
+  <!-- Canonical (evita duplicidade www/sem-www) -->
+  <link rel="canonical" href="https://baroqueworks.com.br/">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Baroque Works Engenharia" />
   <meta property="og:description" content="Projetos completos em Arquitetura e Engenharia: estrutural, elétrico, hidráulico, fundações, contenções, drenagem, saneamento, BIM e inspeções técnicas." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://baroqueworks.com.br" />
-  <meta property="og:image" content="assets/og-image.jpg" />
+  <meta property="og:image" content="https://baroqueworks.com.br/assets/og-image.jpg" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Google Search Console (substitua o content pelo seu token) -->
+  <meta name="google-site-verification" content="COLE_AQUI_O_TOKEN_QUE_O_GOOGLE_TE_DER" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <!-- Performance: preconnect para Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Google Fonts: Montserrat (títulos) + Poppins (corpo) -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -310,6 +324,32 @@
       color:#344054;
     }
   </style>
+
+  <!-- === Schema.org (JSON-LD) — ajuda no SEO local/entidade === -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"Baroque Works Engenharia",
+    "url":"https://baroqueworks.com.br/",
+    "logo":"https://baroqueworks.com.br/assets/logo-horizontal.png",
+    "description":"Projetos de engenharia com rigor técnico: estrutural, elétrico, hidráulico, fundações, contenções, drenagem, saneamento e modelagem BIM.",
+    "areaServed":"Brasil",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Belo Horizonte",
+      "addressRegion":"MG",
+      "addressCountry":"BR"
+    },
+    "contactPoint":{
+      "@type":"ContactPoint",
+      "contactType":"sales",
+      "email":"comercial@baroqueworks.com.br",
+      "telephone":"+55-37-99865-3393",
+      "areaServed":"BR"
+    }
+  }
+  </script>
 </head>
 <body>
   <header>
@@ -341,11 +381,13 @@
           <a class="btn btn--ghost" href="#clientes">Nossos clientes</a>
         </div>
       </div>
-      <!-- Capa com IMAGEM -->
+      <!-- Capa com IMAGEM (com width/height para evitar CLS e alta prioridade de carregamento) -->
       <div class="hero__card">
         <img
           src="assets/projeto_capa.jpg"
           alt="Baroque Works Engenharia – capa"
+          width="1200" height="800"
+          fetchpriority="high"
           style="border-radius:14px; display:block; width:100%; height:auto;">
       </div>
     </div>
@@ -690,4 +732,3 @@
   </script>
 </body>
 </html>
-
