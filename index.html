@@ -144,17 +144,24 @@
     }
     .lead{ font-size:clamp(17px,1.6vw,18px); color:#344054 }
 
-    /* cor bege/dourada e animação do título */
+    /* cor bege/dourada e efeito por letra no título */
     .gold{
       color:var(--bw-gold);
     }
+
     .hero-title{
-      animation:pulseTitle 3s ease-in-out infinite;
       display:inline-block;
     }
-    @keyframes pulseTitle{
+
+    .hero-title .letter{
+      display:inline-block;
+      transform-origin:bottom center;
+      animation:pulseLetter 0.45s ease-in-out forwards;
+    }
+
+    @keyframes pulseLetter{
       0%   { transform:scale(1); }
-      50%  { transform:scale(1.045); }
+      40%  { transform:scale(1.23); }
       100% { transform:scale(1); }
     }
 
@@ -399,7 +406,7 @@
     "name":"Baroque Works Engenharia",
     "url":"https://baroqueworks.com.br/",
     "logo":"https://baroqueworks.com.br/assets/logo-horizontal.png",
-    "description":"Projetos de engenharia com rigor técnico: estrutural, elétrico, hidráulico, fundações, contenções, drenagem, saneamento e modelagem BIM.",
+    "description":"Projetos de engenharia com rigor técnico: estrutural, elétrico, fundações, contenções, drenagem, saneamento e modelagem BIM.",
     "areaServed":"Brasil",
     "address":{
       "@type":"PostalAddress",
@@ -640,165 +647,4 @@
         </div>
         <div>
           <h4>Contato</h4>
-          <p>comercial@baroqueworks.com.br<br>BH • Minas Gerais</p>
-          <p><button type="button" class="linklike" id="open-privacy-2">Política de Privacidade</button></p>
-        </div>
-      </div>
-      <div class="copyright">© <span id="year"></span> Baroque Works Engenharia. Todos os direitos reservados.</div>
-    </div>
-  </footer>
-
-  <!-- MODAL Política de Privacidade -->
-  <div class="modal-backdrop" data-privacy-backdrop hidden></div>
-
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title" aria-describedby="privacy-content" data-privacy-modal hidden>
-    <div class="modal__header">
-      <h2 id="privacy-title" tabindex="-1">Política de Privacidade – Baroque Works Engenharia</h2>
-      <button type="button" class="modal__close" aria-label="Fechar" data-privacy-close>×</button>
-    </div>
-    <div class="modal__body" id="privacy-content">
-      <p>A <strong>Baroque Works Engenharia</strong> respeita a sua privacidade e se compromete com a proteção dos seus dados pessoais. Esta Política explica, de forma simples e transparente, como coletamos, usamos e protegemos informações quando você utiliza nosso site <strong>baroqueworks.com.br</strong>.</p>
-
-      <h3>1) Quem somos</h3>
-      <p>Baroque Works Engenharia (“<strong>nós</strong>”), empresa brasileira detentora do domínio <strong>baroqueworks.com.br</strong>, regularmente registrado no <strong>Registro.br</strong>.<br>
-      Contato oficial: <a href="mailto:contato@baroqueworks.com.br">contato@baroqueworks.com.br</a>.</p>
-
-      <h3>2) Quais dados coletamos</h3>
-      <ul>
-        <li><strong>Dados informados por você:</strong> nome, e-mail, telefone e mensagem enviados por formulário, e-mail ou WhatsApp.</li>
-        <li><strong>Dados de navegação (cookies/analytics):</strong> páginas acessadas, tempo de visita e informações técnicas do dispositivo/navegador, <em>sem identificação direta do usuário</em>, para entender o uso do site e melhorar a experiência.</li>
-      </ul>
-      <p>Você pode gerenciar cookies nas configurações do seu navegador. Se preferir, use a navegação anônima/privada.</p>
-
-      <h3>3) Para que usamos seus dados</h3>
-      <ul>
-        <li>Responder suas solicitações de contato e orçamento;</li>
-        <li>Melhorar conteúdo, usabilidade e segurança do site;</li>
-        <li>Cumprir obrigações legais ou regulatórias, quando necessário.</li>
-      </ul>
-
-      <h3>4) Compartilhamento de dados</h3>
-      <p><strong>Não vendemos nem alugamos</strong> dados pessoais. Compartilhamos apenas quando:</p>
-      <ul>
-        <li>exigido por lei/autoridade competente; ou</li>
-        <li> com fornecedores que nos apoiam no site/infraestrutura (por exemplo, hospedagem), sempre sob dever de confidencialidade e segurança.</li>
-      </ul>
-
-      <h3>5) Base legal</h3>
-      <p>Tratamos dados com fundamento na <strong>LGPD (Lei 13.709/2018)</strong>, principalmente pelas bases: <strong>consentimento</strong>, <strong>legítimo interesse</strong> (melhoria do site) e <strong>execução de procedimentos preliminares a contrato</strong> (responder pedidos de orçamento/contato).</p>
-
-      <h3>6) Segurança</h3>
-      <p>Adotamos medidas técnicas e administrativas para proteger os dados contra acessos não autorizados, perda, alteração ou divulgação indevida.</p>
-
-      <h3>7) Seus direitos (LGPD)</h3>
-      <p>Você pode, a qualquer momento:</p>
-      <ul>
-        <li>solicitar <strong>confirmação</strong> e <strong>acesso</strong> aos dados;</li>
-        <li>pedir <strong>correção</strong> ou <strong>exclusão</strong>;</li>
-        <li><strong>revogar consentimento</strong>;</li>
-        <li>solicitar <strong>portabilidade</strong> quando aplicável;</li>
-        <li>questionar a forma e a finalidade do tratamento.</li>
-      </ul>
-      <p>Para exercer direitos, escreva para <a href="mailto:contato@baroqueworks.com.br">contato@baroqueworks.com.br</a>.</p>
-
-      <h3>8) Retenção</h3>
-      <p>Mantemos os dados somente pelo tempo necessário ao propósito informado (ex.: atendimento do contato) e/ou conforme exigências legais.</p>
-
-      <h3>9) Links externos</h3>
-      <p>Nosso site pode conter links para sites de terceiros. Não temos controle sobre o conteúdo e práticas desses sites e não nos responsabilizamos por suas políticas de privacidade.</p>
-
-      <h3>10) Atualizações desta Política</h3>
-      <p>Esta Política pode ser atualizada para refletir melhorias, mudanças legais ou técnicas. A versão vigente será sempre publicada nesta página, com a data de revisão.</p>
-
-      <p><strong>Última atualização:</strong> 11/10/2025</p>
-    </div>
-    <div class="modal__footer">
-      <button type="button" class="btn btn--primary" data-privacy-close>Fechar</button>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script>
-    // Atualiza ano
-    const yEl = document.getElementById('year');
-    if(yEl){ yEl.textContent = new Date().getFullYear(); }
-
-    // Rolagem suave com compensação do header fixo
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id=a.getAttribute('href');
-        const el=document.querySelector(id);
-        if(!el) return;
-        e.preventDefault();
-        const headerH = (document.querySelector('header')?.offsetHeight || 80) + 8;
-        const y = el.getBoundingClientRect().top + window.pageYOffset - headerH;
-        window.scrollTo({top:y, behavior:'smooth'});
-      });
-    });
-
-    // Navegação do carrossel de LOGOMARCAS
-    (function(){
-      const viewport = document.querySelector('[data-logo-viewport]');
-      const prevBtn = document.querySelector('.lg-prev');
-      const nextBtn = document.querySelector('.lg-next');
-      if(!viewport || !prevBtn || !nextBtn) return;
-
-      function updateButtons(){
-        const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth - 1;
-        prevBtn.disabled = viewport.scrollLeft <= 0;
-        nextBtn.disabled = viewport.scrollLeft >= maxScrollLeft;
-      }
-      function stepSize(){
-        return Math.max(240, Math.floor(viewport.clientWidth * 0.8));
-      }
-      prevBtn.addEventListener('click', ()=> viewport.scrollBy({left: -stepSize(), behavior:'smooth'}));
-      nextBtn.addEventListener('click', ()=> viewport.scrollBy({left:  stepSize(), behavior:'smooth'}));
-      viewport.addEventListener('scroll', updateButtons);
-      window.addEventListener('resize', updateButtons);
-      updateButtons();
-    })();
-
-    // Modal de Política de Privacidade
-    (function(){
-      const openers = [
-        document.getElementById('open-privacy'),
-        document.getElementById('open-privacy-2')
-      ].filter(Boolean);
-
-      const modal    = document.querySelector('[data-privacy-modal]');
-      const backdrop = document.querySelector('[data-privacy-backdrop]');
-      const closers  = modal ? modal.querySelectorAll('[data-privacy-close]') : [];
-
-      if(!modal || !backdrop || openers.length === 0) return;
-
-      const body = document.body;
-      let lastFocused = null;
-
-      function openModal(){
-        lastFocused = document.activeElement;
-        backdrop.hidden = false;
-        modal.hidden = false;
-        body.style.overflow = 'hidden';
-        const title = modal.querySelector('#privacy-title');
-        if(title) title.focus({preventScroll:true});
-      }
-
-      function closeModal(){
-        backdrop.hidden = true;
-        modal.hidden = true;
-        body.style.overflow = '';
-        if(lastFocused && typeof lastFocused.focus === 'function'){
-          lastFocused.focus();
-        }
-      }
-
-      openers.forEach(btn => btn.addEventListener('click', openModal));
-      closers.forEach(btn => btn.addEventListener('click', closeModal));
-      backdrop.addEventListener('click', closeModal);
-      document.addEventListener('keydown', (e)=>{
-        if(e.key === 'Escape' && !modal.hidden) closeModal();
-      });
-    })();
-  </script>
-</body>
-</html>
+          <p>comercial@baroqueworks.com.br<br>BH •
