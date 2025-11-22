@@ -144,6 +144,20 @@
     }
     .lead{ font-size:clamp(17px,1.6vw,18px); color:#344054 }
 
+    /* cor bege/dourada e animação do título */
+    .gold{
+      color:var(--bw-gold);
+    }
+    .hero-title{
+      animation:pulseTitle 3s ease-in-out infinite;
+      display:inline-block;
+    }
+    @keyframes pulseTitle{
+      0%   { transform:scale(1); }
+      50%  { transform:scale(1.045); }
+      100% { transform:scale(1); }
+    }
+
     /* ajustes de cor dentro da capa */
     .hero .h1{ color:#f9fafb; }
     .hero .lead{ color:#e2e8f0; }
@@ -428,7 +442,9 @@
     <div class="container hero__grid">
       <div>
         <span class="eyebrow">Excelência em projetos de engenharia</span>
-        <h1 class="h1">Soluções completas em projetos para grandes negócios.</h1>
+        <h1 class="h1 hero-title">
+          Soluções completas em projetos para <span class="gold">grandes negócios.</span>
+        </h1>
         <p class="lead">
           Desenvolvemos projetos arquitetônicos, estruturais (concreto, madeira, metálica), elétricos, hidráulicos, fundações,
           contenções, drenagem, saneamento, SPDA, SPCI, CFTV, SDAI e muito mais. Utilizamos a metodologia BIM para garantir
