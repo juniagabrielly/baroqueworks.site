@@ -104,12 +104,33 @@
     .btn--primary:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(12,27,42,.18) }
     .btn--ghost{ border-color:var(--bw-navy) }
 
+    /* ==== NOVA CAPA COM IMAGEM DE FUNDO ==== */
     .hero{
-      background:linear-gradient(180deg,var(--bw-cloud),#fff);
-      padding:72px 0 40px; border-bottom:1px solid #eef2f6
+      position:relative;
+      padding:96px 0 80px;
+      color:#fff;
+      background-color:#020617;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      /* coloque aqui o nome do arquivo da imagem que você salvou em /assets */
+      background-image:
+        linear-gradient(120deg, rgba(2,6,23,0.88) 0%, rgba(2,6,23,0.40) 45%, rgba(2,6,23,0.90) 100%),
+        url("assets/hero-baroque-works.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      z-index:0;
+    }
+    .hero > .container{
+      position:relative;
+      z-index:1;
     }
     .hero__grid{
-      display:grid; grid-template-columns:1.1fr .9fr; gap:32px; align-items:center
+      display:block;
+      max-width:720px;
     }
 
     /* Tipografia */
@@ -122,6 +143,25 @@
       font-size:clamp(28px,3vw,32px); line-height:1.15; margin:.35em 0; color:var(--bw-navy)
     }
     .lead{ font-size:clamp(17px,1.6vw,18px); color:#344054 }
+
+    /* ajustes de cor dentro da capa */
+    .hero .h1{ color:#f9fafb; }
+    .hero .lead{ color:#e2e8f0; }
+    .hero .eyebrow{ color:var(--bw-gold); }
+    .hero .btn--primary{
+      background:var(--bw-gold);
+      border-color:var(--bw-gold);
+      color:#111827;
+    }
+    .hero .btn--primary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 32px rgba(0,0,0,.45);
+    }
+    .hero .btn--ghost{
+      border-color:#e2e8f0;
+      color:#e2e8f0;
+      background:transparent;
+    }
 
     section{ padding:60px 0; scroll-margin-top:88px }
     .sec__title{
@@ -171,11 +211,16 @@
     .foot a{ color:#d8e0ef }
 
     @media (max-width:900px){
-      .hero__grid{ grid-template-columns:1fr }
       .grid3{ grid-template-columns:1fr }
       .foot{ grid-template-columns:1fr }
       nav ul{ display:none }
       .cta{ flex-direction:column; align-items:flex-start }
+      .hero{
+        padding:84px 0 72px;
+      }
+      .hero__grid{
+        max-width:100%;
+      }
     }
   </style>
 
@@ -194,7 +239,7 @@
     nav ul a,.btn{ font-size:clamp(18px,2vw,20px) !important; }
     .cta h3{ font-size:clamp(24px,2.6vw,28px) !important; }
     @media (min-width:1100px){
-      .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
+      .hero__grid{ max-width:760px !important; }
     }
     @media (max-width:600px){
       :root{ --wm-opacity:.04; }
@@ -378,25 +423,21 @@
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero – NOVO LAYOUT COM IMAGEM DE FUNDO -->
   <section class="hero">
     <div class="container hero__grid">
       <div>
         <span class="eyebrow">Excelência em projetos de engenharia</span>
         <h1 class="h1">Soluções completas em projetos para grandes negócios.</h1>
-        <p class="lead">Desenvolvemos projetos arquitetônicos, estruturais (concreto, madeira, metálica), elétricos, hidráulicos, fundações, contenções, drenagem, saneamento, SPDA, SPCI, CFTV, SDAI e muito mais. Utilizamos a metodologia BIM para garantir precisão, integração e economia.</p>
-        <div style="display:flex;gap:12px;margin-top:18px">
+        <p class="lead">
+          Desenvolvemos projetos arquitetônicos, estruturais (concreto, madeira, metálica), elétricos, hidráulicos, fundações,
+          contenções, drenagem, saneamento, SPDA, SPCI, CFTV, SDAI e muito mais. Utilizamos a metodologia BIM para garantir
+          precisão, integração e economia.
+        </p>
+        <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
           <a class="btn btn--primary" href="#servicos">Ver serviços</a>
           <a class="btn btn--ghost" href="#clientes">Nossos clientes</a>
         </div>
-      </div>
-      <div class="hero__card">
-        <img
-          src="assets/projeto_capa.jpg"
-          alt="Baroque Works Engenharia – capa"
-          width="1200" height="800"
-          fetchpriority="high"
-          style="border-radius:14px; display:block; width:100%; height:auto;">
       </div>
     </div>
   </section>
