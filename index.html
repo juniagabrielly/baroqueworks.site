@@ -8,1122 +8,740 @@
   <meta name="description" content="Projetos completos em Arquitetura e Engenharia: estrutural, elétrico, hidráulico, fundações, contenções, drenagem, saneamento, BIM e inspeções técnicas." />
   <meta name="robots" content="index,follow" />
 
-  <!-- Canonical -->
+  <!-- Canonical (evita duplicidade www/sem-www) -->
   <link rel="canonical" href="https://baroqueworks.com.br/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Baroque Works Engenharia" />
   <meta property="og:description" content="Projetos completos em Arquitetura e Engenharia: estrutural, elétrico, hidráulico, fundações, contenções, drenagem, saneamento, BIM e inspeções técnicas." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://baroqueworks.com.br/" />
-  <meta property="og:image" content="https://baroqueworks.com.br/img/og-image-baroque.jpg" />
+  <meta property="og:url" content="https://baroqueworks.com.br" />
+  <meta property="og:image" content="https://baroqueworks.com.br/assets/og-image.jpg" />
+  <meta property="og:locale" content="pt_BR" />
 
-  <!-- Fonte -->
+  <!-- Google Search Console -->
+  <meta name="google-site-verification" content="7UHFS3YxP_GJdQVxQs9ee0H5M3QE5yp7EcnSGLXzJqo" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <!-- Performance: preconnect para Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Fonts: Montserrat (títulos) + Poppins (corpo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --azul-escuro: #0C1B2A;
-      --azul-mais-escuro: #050910;
-      --dourado: #C9A646;
-      --cinza-claro: #f5f5f7;
-      --texto: #e5e7eb;
+    :root{
+      --bw-navy:#0C1B2A;
+      --bw-gold:#C9A646;
+      --bw-ink:#0b0f14;
+      --bw-mist:#eef2f6;
+      --bw-cloud:#f7f9fc;
+
+      /* Marca d’água (ajustes) */
+      --wm-size: 320px;
+      --wm-opacity: .06;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{ box-sizing:border-box }
+
+    html{ font-size:16px }
+    html,body{
+      margin:0; padding:0; background:#fff; color:var(--bw-ink);
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+      font-weight:400; line-height:1.6; min-height:100%;
+      position:relative; z-index:0;
     }
 
-    html {
-      scroll-behavior: smooth;
+    /* === Marca d’água em grade (fundo do site TODO) === */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:url("assets/marca_dagua.png");
+      background-repeat:repeat;
+      background-size:var(--wm-size) auto;
+      opacity:var(--wm-opacity);
+      pointer-events:none;
+      z-index:0;
+    }
+    /* conteúdo acima da marca d'água */
+    header, main, section, footer, .container, .hero, .cta { position:relative; z-index:1; }
+
+    img,video{ max-width:100%; height:auto; display:block }
+    a{ color:inherit; text-decoration:none }
+    .container{ width:min(1120px,92%); margin-inline:auto }
+
+    header{
+      position:sticky; top:0; z-index:40;
+      background:rgba(255,255,255,.9);
+      backdrop-filter:saturate(180%) blur(8px);
+      border-bottom:1px solid #e5e9f2;
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+
+    /* Logo responsiva (mantém proporção, sem esticar) */
+    .brand { display:flex; align-items:center; gap:12px }
+    .brand img{
+      display:block;
+      max-height:80px;
+      height:auto;
+      width:auto;
+      object-fit:contain;
+    }
+    @media (max-width:1024px){ .brand img{ max-height:65px } }
+    @media (max-width:600px){ .brand img{ max-height:55px } }
+
+    nav ul{ display:flex; gap:18px; list-style:none; margin:0; padding:0 }
+
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 18px; border-radius:14px; border:1px solid transparent;
+      font-weight:600; transition:.2s ease;
+    }
+    .btn--primary{ background:var(--bw-navy); color:#fff }
+    .btn--primary:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(12,27,42,.18) }
+    .btn--ghost{ border-color:var(--bw-navy) }
+
+    .hero{
+      background:linear-gradient(180deg,var(--bw-cloud),#fff);
+      padding:72px 0 40px; border-bottom:1px solid #eef2f6
+    }
+    .hero__grid{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:32px; align-items:center
     }
 
-    body {
-      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: #ffffff;
-      color: #111827;
+    /* Tipografia */
+    .eyebrow{
+      font-family:'Montserrat',sans-serif; font-weight:600;
+      font-size:14px; letter-spacing:.12em; color:var(--bw-gold); text-transform:uppercase
+    }
+    .h1{
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:clamp(28px,3vw,32px); line-height:1.15; margin:.35em 0; color:var(--bw-navy)
+    }
+    .lead{ font-size:clamp(17px,1.6vw,18px); color:#344054 }
+
+    section{ padding:60px 0; scroll-margin-top:88px }
+    .sec__title{
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:clamp(22px,2.4vw,26px); line-height:1.25; margin:0 0 14px; color:var(--bw-navy)
+    }
+    .sec__desc{ color:#475467; margin:0 0 26px }
+
+    .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px }
+    .card{
+      background:#fff; border:1px solid #e5e9f0; border-radius:18px;
+      padding:22px; box-shadow:0 6px 18px rgba(12,27,42,.05); transition:.2s
+    }
+    .card:hover{ transform:translateY(-2px) }
+    .card h3{
+      font-family:'Poppins',sans-serif; font-weight:500;
+      font-size:clamp(18px,2vw,20px); line-height:1.3; margin:8px 0 12px; color:var(--bw-navy)
+    }
+    .card p,.sec__desc,footer p{ font-size:clamp(16px,1.4vw,18px) }
+    .copyright{ font-size:14px }
+
+    /* Listas de serviços (tópicos) */
+    .list{ margin:0; padding:0; list-style:none; display:grid; gap:10px }
+    .list li{ display:flex; align-items:flex-start; gap:10px; color:#334155 }
+    .list li::before{ content:"•"; color:var(--bw-gold); font-weight:800; line-height:1; margin-top:2px }
+
+    /* Botões e menus */
+    nav ul a,.btn{
+      font-family:'Montserrat',sans-serif; font-weight:600;
+      font-size:clamp(16px,1.6vw,18px); letter-spacing:.02em; text-transform:none
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+    /* CTA */
+    .cta{
+      background:linear-gradient(180deg,var(--bw-navy),#091525);
+      color:#fff; border-radius:22px; padding:28px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px
+    }
+    .cta h3{
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:clamp(20px,2.2vw,24px); margin:0
     }
 
-    /* HEADER / NAV */
+    footer{ background:#0A1420; color:#c9d2e3; padding:36px 0; margin-top:40px }
+    .foot{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:28px }
+    .foot h4{ margin:0 0 10px; font-size:16px; color:#eef2f9 }
+    .foot a{ color:#d8e0ef }
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: linear-gradient(to bottom,
-        rgba(5, 9, 16, 0.98),
-        rgba(5, 9, 16, 0.9),
-        transparent
-      );
-      backdrop-filter: blur(8px);
+    @media (max-width:900px){
+      .hero__grid{ grid-template-columns:1fr }
+      .grid3{ grid-template-columns:1fr }
+      .foot{ grid-template-columns:1fr }
+      nav ul{ display:none }
+      .cta{ flex-direction:column; align-items:flex-start }
+    }
+  </style>
+
+  <!-- === OVERRIDES – Layout grande (container/logo/tipos) === -->
+  <style>
+    .container{ width:min(1280px,94%) !important; }
+    .brand img{ max-height:96px !important; }
+    @media (max-width:1024px){ .brand img{ max-height:80px !important; } }
+    @media (max-width:600px){ .brand img{ max-height:64px !important; } }
+    section{ padding:72px 0 !important; }
+    html{ font-size:17.5px; }
+    .lead{ font-size:clamp(18px,1.9vw,19px) !important; }
+    .h1{ font-size:clamp(34px,4.2vw,40px) !important; line-height:1.12 !important; }
+    .sec__title{ font-size:clamp(26px,3.2vw,32px) !important; }
+    .card p,.sec__desc,footer p{ font-size:clamp(17px,1.6vw,18.5px) !important; }
+    nav ul a,.btn{ font-size:clamp(18px,2vw,20px) !important; }
+    .cta h3{ font-size:clamp(24px,2.6vw,28px) !important; }
+    @media (min-width:1100px){
+      .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
+    }
+    @media (max-width:600px){
+      :root{ --wm-opacity:.04; }
+    }
+  </style>
+
+  <!-- === Estilos do BLOCO DE LOGOMARCAS (fixo, com setas) === -->
+  <style>
+    .clients .sec__title,.clients .sec__desc{ text-align:center; }
+    .logo-slider2{
+      display:flex; align-items:center; gap:10px;
+      border:1px solid #e5e9f0; border-radius:14px; background:#fff; padding:10px;
+    }
+    .logo-btn{
+      background:var(--bw-navy); color:#fff; border:none; cursor:pointer;
+      width:36px; height:36px; border-radius:10px; font-size:20px; line-height:1;
+      display:flex; align-items:center; justify-content:center;
+      transition:.2s ease; flex:0 0 auto;
+    }
+    .logo-btn[disabled]{ opacity:.4; cursor:not-allowed; }
+    .logo-btn:hover:not([disabled]){ transform:translateY(-1px); box-shadow:0 6px 14px rgba(12,27,42,.2); }
+
+    .logo-viewport{
+      overflow:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+      scrollbar-width:thin; flex:1 1 auto;
+    }
+    .logo-row{
+      display:flex; align-items:center; gap:42px; padding:6px; min-width:100%;
+    }
+    .logo-row img, .logo-row a{ scroll-snap-align:center; flex:0 0 auto; }
+    .logo-row img{
+      height:48px; width:auto; filter:grayscale(100%); opacity:.85; transition:.2s ease;
+    }
+    .logo-row img:hover{ filter:none; opacity:1; transform:translateY(-1px); }
+
+    @media (max-width:900px){
+      .logo-row{ gap:28px; }
+      .logo-row img{ height:40px; }
+    }
+  </style>
+
+  <!-- === CSS do MODAL de Política de Privacidade === -->
+  <style>
+    .linklike{
+      background:none; border:none; padding:0; margin:0;
+      font: inherit; color:var(--bw-navy); cursor:pointer; text-decoration:underline;
     }
 
-    .nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(0,0,0,.48);
+      z-index:1000;
     }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    .modal{
+      position:fixed; inset:auto 0 0 0;
+      margin:auto; max-width:min(920px,94%); max-height:84vh;
+      background:#fff; border-radius:18px; border:1px solid #e8edf4;
+      box-shadow:0 20px 60px rgba(12,27,42,.25);
+      display:flex; flex-direction:column; overflow:hidden; z-index:1001;
+      top:50%; transform:translateY(-50%);
+    }
+    .modal__header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 18px; border-bottom:1px solid #eef2f6; background:#f9fbff;
+    }
+    .modal__header h2{
+      margin:0; font-family:'Montserrat',sans-serif; font-weight:700; color:#0C1B2A; font-size:clamp(18px,2.4vw,22px);
+    }
+    .modal__close{
+      background:#0C1B2A; color:#fff; border:none; width:36px; height:36px; border-radius:10px; font-size:20px; cursor:pointer;
+    }
+    .modal__body{
+      padding:18px; overflow:auto;
+    }
+    .modal__body h3{
+      font-family:'Montserrat',sans-serif; color:#0C1B2A; margin:22px 0 8px; font-size:clamp(16px,2.2vw,20px);
+    }
+    .modal__body p, .modal__body li{
+      font-size:clamp(15px,1.8vw,17px); color:#344054;
+    }
+    .modal__footer{
+      padding:12px 18px; border-top:1px solid #eef2f6; display:flex; justify-content:flex-end; gap:10px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
+    @media (max-width:640px){
+      .modal{ max-height:90vh; border-radius:16px; }
     }
 
-    .logo img {
-      height: 44px;
-      width: auto;
-      display: block;
-    }
+    [hidden]{ display:none !important; }
+  </style>
 
-    .nav-brand-text {
-      display: flex;
-      flex-direction: column;
-      font-size: 0.7rem;
-      color: #9ca3af;
-      line-height: 1.2;
-    }
-
-    .nav-brand-text strong {
-      font-size: 0.8rem;
-      color: #e5e7eb;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #e5e7eb;
-    }
-
-    .nav-menu a {
+  <!-- === CSS do SOBRE centralizado + grid de fundo somente nessa seção === -->
+  <style>
+    #sobre{
       position: relative;
-      padding-bottom: 0.25rem;
+      text-align: center;
+      overflow: hidden;
+      background:#fff;
     }
-
-    .nav-menu a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--dourado);
-      transition: width 0.25s ease;
-    }
-
-    .nav-menu a:hover::after {
-      width: 100%;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 0.8rem;
-      color: #e5e7eb;
-    }
-
-    .nav-phone {
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .btn-nav {
-      border-radius: 999px;
-      border: 1px solid rgba(201, 166, 70, 0.7);
-      padding: 0.45rem 1rem;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--dourado);
-      background: transparent;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
-    }
-
-    .btn-nav:hover {
-      background: var(--dourado);
-      color: #050910;
-      transform: translateY(-1px);
-    }
-
-    /* Hamburger (mobile) */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-    }
-    .nav-toggle span {
-      width: 22px;
-      height: 2px;
-      background: #e5e7eb;
-    }
-
-    @media (max-width: 900px) {
-      .nav-menu,
-      .nav-right {
-        display: none;
-      }
-      .nav-toggle {
-        display: flex;
-      }
-
-      .nav.open .nav-menu,
-      .nav.open .nav-right {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        background: rgba(5, 9, 16, 0.98);
-        position: absolute;
-        left: 0;
-        top: 100%;
-        width: 100%;
-        padding: 1rem 1.5rem 1.5rem;
-        border-top: 1px solid rgba(55, 65, 81, 0.5);
-      }
-
-      .nav.open .nav-right {
-        align-items: flex-start;
-      }
-    }
-
-    /* HERO */
-
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(5, 9, 16, 0.92),
-          rgba(12, 27, 42, 0.92),
-          rgba(5, 9, 16, 0.98)
-        ),
-        url("img/hero-baroque.jpg") center center / cover no-repeat;
-      color: var(--texto);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5rem 1.5rem 3rem;
-    }
-
-    .hero::after {
-      /* leve textura/gradiente no rodapé do hero */
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 120px;
-      background: linear-gradient(to top, #ffffff, transparent);
-      pointer-events: none;
-    }
-
-    .hero-inner {
+    #sobre .container{
       position: relative;
       z-index: 1;
-      max-width: 1200px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 3rem;
-      align-items: center;
-    }
-
-    @media (max-width: 900px) {
-      .hero-inner {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .hero-text {
-      max-width: 640px;
-    }
-
-    .hero-kicker {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: rgba(229, 231, 235, 0.8);
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3.5rem);
-      line-height: 1.1;
-      font-weight: 700;
-      color: #f9fafb;
-      margin-bottom: 1rem;
-    }
-
-    .hero-title span {
-      color: var(--dourado);
-    }
-
-    .hero-subtitle {
-      font-size: 0.98rem;
-      line-height: 1.6;
-      color: rgba(229, 231, 235, 0.82);
-      margin-bottom: 1.8rem;
-      max-width: 520px;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .hero-badge {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 0.25rem 0.75rem;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #d1d5db;
-      background: rgba(15, 23, 42, 0.65);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .btn-primary {
-      border-radius: 999px;
-      padding: 0.8rem 1.6rem;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 600;
-      border: 1px solid var(--dourado);
-      background: var(--dourado);
-      color: #050910;
-      cursor: pointer;
-      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
-    }
-
-    .btn-primary:hover {
-      background: #d7b75b;
-      transform: translateY(-1px);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
-    }
-
-    .btn-outline {
-      border-radius: 999px;
-      padding: 0.8rem 1.6rem;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 500;
-      border: 1px solid rgba(229, 231, 235, 0.4);
-      background: transparent;
-      color: #e5e7eb;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    }
-
-    .btn-outline:hover {
-      background: rgba(15, 23, 42, 0.85);
-      border-color: rgba(249, 250, 251, 0.9);
-    }
-
-    .hero-note {
-      font-size: 0.75rem;
-      color: rgba(209, 213, 219, 0.76);
-    }
-
-    .hero-side {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      align-items: flex-start;
-    }
-
-    .hero-card {
-      background: rgba(15, 23, 42, 0.92);
-      border-radius: 1rem;
-      padding: 1.1rem 1.25rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-      width: 100%;
-    }
-
-    .hero-card h3 {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--dourado);
-      margin-bottom: 0.4rem;
-    }
-
-    .hero-card p {
-      font-size: 0.85rem;
-      color: rgba(229, 231, 235, 0.9);
-      line-height: 1.5;
-    }
-
-    .hero-metric-row {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 0.7rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-metric {
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-    }
-
-    .hero-metric strong {
-      font-size: 1.2rem;
-      color: #f9fafb;
-    }
-
-    .hero-metric span {
-      font-size: 0.7rem;
-      color: rgba(156, 163, 175, 0.9);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    /* SEÇÕES BASE */
-
-    main {
-      background: #ffffff;
-    }
-
-    section {
-      padding: 4.5rem 1.5rem;
-    }
-
-    .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      margin-bottom: 2.5rem;
-    }
-
-    .section-kicker {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: #9ca3af;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #111827;
-    }
-
-    .section-subtitle {
-      margin-top: 0.5rem;
-      font-size: 0.98rem;
-      color: #4b5563;
-      max-width: 600px;
-    }
-
-    /* SOBRE */
-
-    #sobre {
-      background: #ffffff;
-    }
-
-    .sobre-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 2.5rem;
-      align-items: flex-start;
-    }
-
-    .sobre-text p {
-      font-size: 0.98rem;
-      line-height: 1.7;
-      color: #4b5563;
-      margin-bottom: 1rem;
-    }
-
-    .sobre-points {
-      margin-top: 1.5rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-    }
-
-    .sobre-point {
-      padding: 0.9rem 1rem;
-      border-radius: 0.9rem;
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      background: #f9fafb;
-      font-size: 0.86rem;
-      color: #374151;
-    }
-
-    .sobre-point strong {
-      display: block;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #6b7280;
-      margin-bottom: 0.25rem;
-    }
-
-    .sobre-side {
-      border-radius: 1.1rem;
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      background: radial-gradient(circle at top left, #e5e7eb, #f9fafb);
-      padding: 1.5rem 1.6rem;
-    }
-
-    .sobre-side h3 {
-      font-size: 0.9rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--azul-escuro);
-      margin-bottom: 0.8rem;
-    }
-
-    .sobre-side ul {
-      list-style: none;
-      padding-left: 0;
-      display: grid;
-      gap: 0.5rem;
-      font-size: 0.86rem;
-      color: #374151;
-    }
-
-    .sobre-side li::before {
-      content: "▹";
-      color: var(--dourado);
-      margin-right: 0.4rem;
-    }
-
-    /* SERVIÇOS */
-
-    #servicos {
-      background: var(--cinza-claro);
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 1rem;
-      padding: 1.4rem 1.5rem;
-      border: 1px solid rgba(209, 213, 219, 0.8);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #111827;
-    }
-
-    .card p {
-      font-size: 0.9rem;
-      color: #4b5563;
-      flex: 1;
-    }
-
-    .card-tags {
-      margin-top: 0.3rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-    }
-
-    .card-tag {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      background: #f3f4f6;
-      color: #6b7280;
-    }
-
-    /* PORTFÓLIO SIMPLES */
-
-    #portfolio {
-      background: #ffffff;
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .portfolio-card {
-      border-radius: 1.1rem;
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      overflow: hidden;
-      background: #f9fafb;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .portfolio-thumb {
-      background: linear-gradient(135deg, var(--azul-escuro), var(--dourado));
-      height: 160px;
-    }
-
-    .portfolio-body {
-      padding: 1.1rem 1.25rem 1.25rem;
-    }
-
-    .portfolio-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #6b7280;
-      margin-bottom: 0.3rem;
-    }
-
-    .portfolio-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #111827;
-      margin-bottom: 0.3rem;
-    }
-
-    .portfolio-body p {
-      font-size: 0.88rem;
-      color: #4b5563;
-    }
-
-    /* CLIENTES */
-
-    #clientes {
-      background: #f3f4f6;
-    }
-
-    .clientes-logos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    .cliente-item {
-      min-width: 110px;
-      font-size: 0.8rem;
-      color: #4b5563;
-      padding: 0.7rem 1rem;
-      border-radius: 999px;
-      border: 1px dashed rgba(156, 163, 175, 0.7);
-      background: #ffffff;
-    }
-
-    /* CONTATO */
-
-    #contato {
-      background: #ffffff;
-    }
-
-    .contato-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
-      gap: 2.5rem;
-    }
-
-    .contato-info {
-      font-size: 0.95rem;
-      color: #4b5563;
-      display: grid;
-      gap: 0.9rem;
-    }
-
-    .contato-info p strong {
-      color: #111827;
-    }
-
-    .contato-list {
-      list-style: none;
-      padding-left: 0;
-      display: grid;
-      gap: 0.4rem;
-      font-size: 0.9rem;
-    }
-
-    .contato-list li::before {
-      content: "▹";
-      color: var(--dourado);
-      margin-right: 0.4rem;
-    }
-
-    .contato-form {
-      background: #f9fafb;
-      border-radius: 1.1rem;
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      padding: 1.6rem 1.7rem;
-    }
-
-    .contato-form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    @media (max-width: 750px) {
-      .sobre-grid,
-      .contato-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .contato-form-row {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .form-group {
-      margin-bottom: 0.9rem;
-      font-size: 0.85rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.25rem;
-      color: #374151;
-      font-weight: 500;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      border-radius: 0.6rem;
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      padding: 0.55rem 0.65rem;
-      font-size: 0.9rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease;
-      background: #ffffff;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: var(--dourado);
-      box-shadow: 0 0 0 1px rgba(201, 166, 70, 0.5);
-    }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .form-note {
-      font-size: 0.8rem;
-      color: #6b7280;
-      margin-top: 0.4rem;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: var(--azul-mais-escuro);
-      color: #9ca3af;
-      padding: 1.5rem 1.5rem 1.8rem;
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.78rem;
-    }
-
-    .footer-inner a {
-      color: #e5e7eb;
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-    }
-
-    @media (max-width: 640px) {
-      section {
-        padding: 3.5rem 1.25rem;
-      }
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
+      max-width: 900px;
+    }
+    #sobre::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:url("assets/marca_dagua.png");
+      background-repeat:repeat;
+      background-size:320px auto;
+      pointer-events:none;
+      z-index:0;
+    }
+    #sobre .sec__desc{
+      font-size:clamp(18.5px,2.1vw,21px);
+      line-height:1.9;
+      margin:0 0 18px;
+      color:#344054;
+    }
+  </style>
+
+  <!-- === CSS extra para botão WhatsApp menor no mobile === -->
+  <style>
+    .btn--whats{
+      padding:10px 16px;
+      border-radius:12px;
+    }
+
+    @media (max-width:600px){
+      .btn--whats{
+        padding:8px 12px;
+        font-size:15px !important;
+        border-radius:10px;
       }
     }
   </style>
+
+  <!-- === Schema.org (JSON-LD) — ajuda no SEO local/entidade === -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"Baroque Works Engenharia",
+    "url":"https://baroqueworks.com.br/",
+    "logo":"https://baroqueworks.com.br/assets/logo-horizontal.png",
+    "description":"Projetos de engenharia com rigor técnico: estrutural, elétrico, hidráulico, fundações, contenções, drenagem, saneamento e modelagem BIM.",
+    "areaServed":"Brasil",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Belo Horizonte",
+      "addressRegion":"MG",
+      "addressCountry":"BR"
+    },
+    "contactPoint":{
+      "@type":"ContactPoint",
+      "contactType":"sales",
+      "email":"comercial@baroqueworks.com.br",
+      "telephone":"+55-37-99865-3393",
+      "areaServed":"BR"
+    }
+  }
+  </script>
 </head>
 <body>
-
-  <!-- HEADER -->
   <header>
-    <div class="nav" id="navbar">
-      <div class="nav-left">
-        <a href="#home" class="logo">
-          <!-- ajuste o caminho da logo -->
-          <img src="img/logo-baroque-horizontal.png" alt="Baroque Works Engenharia">
-        </a>
-        <div class="nav-brand-text">
-          <strong>Baroque Works Engenharia</strong>
-          <span>Projetos completos em Arquitetura &amp; Engenharia</span>
-        </div>
+    <div class="container nav">
+      <div class="brand">
+        <img src="assets/logo-horizontal.png" alt="Baroque Works Engenharia" />
       </div>
-
-      <nav class="nav-menu">
-        <a href="#home">Home</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#portfolio">Portfólio</a>
-        <a href="#clientes">Clientes</a>
-        <a href="#contato">Contato</a>
+      <nav>
+        <ul>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#clientes">Clientes</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
       </nav>
-
-      <div class="nav-right">
-        <div class="nav-phone">31 0000-0000</div>
-        <a href="#contato" class="btn-nav">Solicitar proposta</a>
-      </div>
-
-      <div class="nav-toggle" id="navToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <a class="btn btn--primary btn--whats" href="https://wa.me/5537998653393?text=Olá%20Baroque%20Works!%20Quero%20um%20orçamento." target="_blank" rel="noopener">
+        Fale no WhatsApp
+      </a>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <div class="hero-kicker">Engenharia &amp; Arquitetura</div>
-        <h1 class="hero-title">
-          Mais inteligência e <span>qualidade</span><br>
-          em cada metro quadrado.
-        </h1>
-        <p class="hero-subtitle">
-          Projetos estruturais, elétricos, hidrossanitários, fundações, contenções, drenagem,
-          saneamento, BIM e inspeções técnicas para empreendimentos residenciais,
-          comerciais e industriais.
-        </p>
-
-        <div class="hero-badges">
-          <div class="hero-badge">Projetos completos</div>
-          <div class="hero-badge">Foco em desempenho</div>
-          <div class="hero-badge">Conformidade normativa</div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div>
+        <span class="eyebrow">Excelência em projetos de engenharia</span>
+        <h1 class="h1">Soluções completas em projetos para grandes negócios.</h1>
+        <p class="lead">Desenvolvemos projetos arquitetônicos, estruturais (concreto, madeira, metálica), elétricos, hidráulicos, fundações, contenções, drenagem, saneamento, SPDA, SPCI, CFTV, SDAI e muito mais. Utilizamos a metodologia BIM para garantir precisão, integração e economia.</p>
+        <div style="display:flex;gap:12px;margin-top:18px">
+          <a class="btn btn--primary" href="#servicos">Ver serviços</a>
+          <a class="btn btn--ghost" href="#clientes">Nossos clientes</a>
         </div>
-
-        <div class="hero-actions">
-          <a href="#contato" class="btn-primary">Fale com a Baroque Works</a>
-          <a href="#servicos" class="btn-outline">Conheça nossos serviços</a>
-        </div>
-
-        <p class="hero-note">
-          Atuação em Belo Horizonte e região, com soluções sob medida para construtoras,
-          incorporadoras, investidores e arquitetos.
-        </p>
       </div>
+      <div class="hero__card">
+        <img
+          src="assets/projeto_capa.jpg"
+          alt="Baroque Works Engenharia – capa"
+          width="1200" height="800"
+          fetchpriority="high"
+          style="border-radius:14px; display:block; width:100%; height:auto;">
+      </div>
+    </div>
+  </section>
 
-      <div class="hero-side">
-        <div class="hero-card">
-          <h3>Projetos sob medida</h3>
-          <p>
-            Integramos arquitetura, engenharia e tecnologia para garantir eficiência,
-            segurança e viabilidade econômica do seu empreendimento.
-          </p>
-          <div class="hero-metric-row">
-            <div class="hero-metric">
-              <strong>+</strong><span>Experiência de obra</span>
-            </div>
-            <div class="hero-metric">
-              <strong>BIM</strong><span>modelagem e compatibilização</span>
+  <!-- Serviços -->
+  <section id="servicos">
+    <div class="container">
+      <h2 class="sec__title">Serviços</h2>
+      <p class="sec__desc">Projetamos, compatibilizamos e gerenciamos disciplinas para empreendimentos de médio e grande porte.</p>
+
+      <div class="grid3">
+        <article class="card">
+          <h3>Arquitetura</h3>
+          <ul class="list">
+            <li>Estudos preliminares e anteprojeto</li>
+            <li>Projeto legal e aprovação em órgãos</li>
+            <li>Projeto executivo e detalhamento</li>
+            <li>Layout corporativo e varejo</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Estruturas</h3>
+          <ul class="list">
+            <li>Concreto armado e protendido</li>
+            <li>Estruturas metálicas</li>
+            <li>Estruturas em madeira</li>
+            <li>Fundações e contenções</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Elétrica &amp; Sistemas</h3>
+          <ul class="list">
+            <li>Baixa e média tensão</li>
+            <li>SPDA e aterramento</li>
+            <li>Dados e voz (Cabeamento Estruturado)</li>
+            <li>CFTV e cabeamento</li>
+            <li>SDAI</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Sistema de Prevenção e Combate a Incêndio</h3>
+          <ul class="list">
+            <li>Extintores, iluminação e sinalização de emergência</li>
+            <li>Sprinklers e hidrantes</li>
+            <li>Plano de prevenção e combate</li>
+            <li>Rotas de fuga e sinalização</li>
+            <li>Pressurização de escadas</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Hidrossanitário &amp; Saneamento</h3>
+          <ul class="list">
+            <li>Abastecimento de água fria e quente</li>
+            <li>Coleta, transporte e tratamento de esgoto sanitário</li>
+            <li>Drenagem urbana</li>
+            <li>Reuso e reservação</li>
+            <li>ETAs e ETEs compactas</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>BIM &amp; Gestão</h3>
+          <ul class="list">
+            <li>Modelagem e coordenação BIM</li>
+            <li>Detecção de interferências (clash detection)</li>
+            <li>Compatibilização interdisciplinar</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Laudos &amp; Inspeções</h3>
+          <ul class="list">
+            <li>Inspeção predial</li>
+            <li>Patologias e perícias</li>
+            <li>Vistorias técnicas</li>
+            <li>Relatórios e recomendações executivas</li>
+          </ul>
+        </article>
+
+        <div class="card" style="background:transparent;border:0;box-shadow:none"></div>
+        <div class="card" style="background:transparent;border:0;box-shadow:none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTES -->
+  <section id="clientes">
+    <div class="container">
+      <div class="clients">
+        <h3 class="sec__title">Algumas marcas atendidas</h3>
+        <p class="sec__desc">Projetos e consultorias para varejo, corporativo e indústrias.</p>
+
+        <div class="logo-slider2" aria-label="Clientes Baroque Works">
+          <button class="logo-btn lg-prev" type="button" aria-label="Anterior">‹</button>
+          <div class="logo-viewport" data-logo-viewport>
+            <div class="logo-row">
+              <img src="assets/cliente1.png" alt="Cliente 1">
+              <img src="assets/cliente2.png" alt="Cliente 2">
+              <img src="assets/cliente3.webp" alt="Cliente 3">
+              <img src="assets/cliente4.png" alt="Cliente 4">
+              <img src="assets/cliente5.png" alt="Cliente 5">
+              <img src="assets/cliente6.png" alt="Cliente 6">
+              <img src="assets/cliente7.png" alt="Cliente 7">
             </div>
           </div>
-        </div>
-
-        <div class="hero-card">
-          <h3>Baroque Works Engenharia</h3>
-          <p>
-            Da concepção à entrega, acompanhamos todas as etapas de projeto,
-            alinhando prazos, custos e desempenho técnico.
-          </p>
+          <button class="logo-btn lg-next" type="button" aria-label="Próxima">›</button>
         </div>
       </div>
     </div>
   </section>
 
-  <main>
+  <!-- CTA -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta">
+        <h3>Quer ver um case específico do seu segmento?</h3>
+        <a class="btn btn--primary" href="mailto:comercial@baroqueworks.com.br">Fale com a nossa equipe</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- SOBRE -->
-    <section id="sobre">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="section-kicker">Quem somos</div>
-          <h2 class="section-title">Tradição de obra, visão de futuro.</h2>
-          <p class="section-subtitle">
-            A Baroque Works nasce da vivência de canteiro de obras e da paixão
-            por projetos bem resolvidos. Unimos experiência prática, domínio técnico
-            e tecnologia para entregar soluções de engenharia que geram valor real.
-          </p>
-        </div>
+  <!-- Links -->
+  <section id="links">
+    <div class="container">
+      <div style="margin-top:0;padding:20px 0;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;border-top:1px solid #e5e9f2">
+        <a href="tel:+5537998653393">Telefone: (37) 9 9865-3393</a>
+        <a href="mailto:comercial@baroqueworks.com.br">Email</a>
+        <button type="button" class="linklike" id="open-privacy">Política de Privacidade</button>
+      </div>
+    </div>
+  </section>
 
-        <div class="sobre-grid">
-          <div class="sobre-text">
-            <p>
-              Desde cedo, a trajetória da empresa é marcada pela presença em obras
-              e pelo contato direto com a realidade da construção civil. Essa vivência
-              é o que nos permite propor soluções que funcionam tanto no papel quanto
-              no canteiro.
-            </p>
-            <p>
-              Atuamos em projetos estruturais, elétricos, hidrossanitários, de fundações,
-              contenções, drenagem e saneamento, além de modelagem BIM e inspeções técnicas.
-            </p>
+  <!-- Sobre -->
+  <section id="sobre">
+    <div class="container">
+      <h2 class="sec__title">Sobre</h2>
 
-            <div class="sobre-points">
-              <div class="sobre-point">
-                <strong>Visão integrada</strong>
-                Projetos pensados em conjunto para minimizar interferências e
-                retrabalhos na obra.
-              </div>
-              <div class="sobre-point">
-                <strong>Excelência técnica</strong>
-                Rigor normativo, dimensionamentos otimizados e foco em segurança
-                e durabilidade.
-              </div>
-              <div class="sobre-point">
-                <strong>Parceria</strong>
-                Atuação lado a lado com construtoras, arquitetos e investidores,
-                desde o estudo de viabilidade até o pós-obra.
-              </div>
-            </div>
+      <p class="sec__desc">A Baroque Works Engenharia nasceu com o propósito de unir precisão técnica, tecnologia e visão estratégica para entregar soluções completas e confiáveis em engenharia. Cada projeto é conduzido com rigor técnico, responsabilidade e compromisso com resultados eficientes e sustentáveis.</p>
+
+      <p class="sec__desc">Com sólida experiência prática em obras e no desenvolvimento de projetos estruturais, elétricos, hidráulicos, de fundações, contenções, drenagem, saneamento e modelagem BIM, a empresa se apoia em tecnologia e processos de excelência para garantir qualidade do planejamento à execução.</p>
+
+      <p class="sec__desc">A Baroque Works Engenharia valoriza parcerias sólidas e duradouras com seus clientes, oferecendo atendimento personalizado, transparência e comprometimento em cada entrega. Acreditamos que engenharia é construir com propósito, responsabilidade e precisão, transformando desafios em resultados e contribuindo para o desenvolvimento de um futuro mais sólido e eficiente.</p>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato">
+    <div class="container">
+      <h2 class="sec__title">Contato</h2>
+      <p class="sec__desc">Fale com nossa equipe e peça um orçamento.</p>
+      <div class="grid3">
+        <article class="card">
+          <h3>Email</h3>
+          <p><a href="mailto:comercial@baroqueworks.com.br">comercial@baroqueworks.com.br</a></p>
+        </article>
+        <article class="card">
+          <h3>WhatsApp</h3>
+          <p><a href="https://wa.me/5537998653393" target="_blank" rel="noopener">(37) 9 9865-3393</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div class="brand" style="margin-bottom:10px">
+            <img src="assets/logo_horizontal_branco.png" alt="Baroque Works Engenharia" style="max-height:50px;height:auto;width:auto;object-fit:contain" />
           </div>
-
-          <aside class="sobre-side">
-            <h3>Por que escolher a Baroque Works?</h3>
-            <ul>
-              <li>Experiência prática em gestão e execução de obras.</li>
-              <li>Domínio em projetos estruturais, elétricos e hidrossanitários.</li>
-              <li>Aplicação de BIM e compatibilização de projetos.</li>
-              <li>Foco em desempenho, economia de materiais e prazos mais seguros.</li>
-              <li>Atendimento próximo, técnico e transparente.</li>
-            </ul>
-          </aside>
+          <p>Excelência e inovação em projetos de Engenharia Civil para grandes empreendimentos.</p>
+        </div>
+        <div>
+          <h4>Mapa do site</h4>
+          <a href="#servicos">Serviços</a><br>
+          <a href="#clientes">Clientes</a><br>
+          <a href="#sobre">Sobre</a><br>
+          <a href="#contato">Contato</a>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <p>comercial@baroqueworks.com.br<br>BH • Minas Gerais</p>
+          <p><button type="button" class="linklike" id="open-privacy-2">Política de Privacidade</button></p>
         </div>
       </div>
-    </section>
+      <div class="copyright">© <span id="year"></span> Baroque Works Engenharia. Todos os direitos reservados.</div>
+    </div>
+  </footer>
 
-    <!-- SERVIÇOS -->
-    <section id="servicos">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="section-kicker">Serviços</div>
-          <h2 class="section-title">Projetos de engenharia para cada etapa do seu empreendimento.</h2>
-          <p class="section-subtitle">
-            Do estudo de viabilidade à entrega da obra, oferecemos soluções completas em arquitetura e engenharia,
-            dimensionadas para o seu tipo de projeto.
-          </p>
-        </div>
+  <!-- MODAL Política de Privacidade -->
+  <div class="modal-backdrop" data-privacy-backdrop hidden></div>
 
-        <div class="cards-grid">
-          <article class="card">
-            <h3>Projetos Estruturais</h3>
-            <p>
-              Dimensionamento de estruturas em concreto armado, aço e alvenaria
-              estrutural, com foco em desempenho, segurança e racionalização de materiais.
-            </p>
-            <div class="card-tags">
-              <span class="card-tag">Edifícios</span>
-              <span class="card-tag">Galpões</span>
-              <span class="card-tag">Obras especiais</span>
-            </div>
-          </article>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title" aria-describedby="privacy-content" data-privacy-modal hidden>
+    <div class="modal__header">
+      <h2 id="privacy-title" tabindex="-1">Política de Privacidade – Baroque Works Engenharia</h2>
+      <button type="button" class="modal__close" aria-label="Fechar" data-privacy-close>×</button>
+    </div>
+    <div class="modal__body" id="privacy-content">
+      <p>A <strong>Baroque Works Engenharia</strong> respeita a sua privacidade e se compromete com a proteção dos seus dados pessoais. Esta Política explica, de forma simples e transparente, como coletamos, usamos e protegemos informações quando você utiliza nosso site <strong>baroqueworks.com.br</strong>.</p>
 
-          <article class="card">
-            <h3>Projetos Elétricos &amp; SPDA</h3>
-            <p>
-              Projetos de instalações elétricas de baixa tensão, SPDA,
-              iluminação e lógica, seguindo normas técnicas e boas práticas
-              de desempenho e segurança.
-            </p>
-            <div class="card-tags">
-              <span class="card-tag">Elétrica</span>
-              <span class="card-tag">SPDA</span>
-              <span class="card-tag">CFTV / dados</span>
-            </div>
-          </article>
+      <h3>1) Quem somos</h3>
+      <p>Baroque Works Engenharia (“<strong>nós</strong>”), empresa brasileira detentora do domínio <strong>baroqueworks.com.br</strong>, regularmente registrado no <strong>Registro.br</strong>.<br>
+      Contato oficial: <a href="mailto:contato@baroqueworks.com.br">contato@baroqueworks.com.br</a>.</p>
 
-          <article class="card">
-            <h3>Projetos Hidrossanitários</h3>
-            <p>
-              Sistemas de água fria, água quente, esgoto sanitário, águas pluviais,
-              drenagem e saneamento, integrados ao conceito arquitetônico e às
-              demandas da operação.
-            </p>
-            <div class="card-tags">
-              <span class="card-tag">Hidráulica</span>
-              <span class="card-tag">Drenagem</span>
-              <span class="card-tag">Saneamento</span>
-            </div>
-          </article>
+      <h3>2) Quais dados coletamos</h3>
+      <ul>
+        <li><strong>Dados informados por você:</strong> nome, e-mail, telefone e mensagem enviados por formulário, e-mail ou WhatsApp.</li>
+        <li><strong>Dados de navegação (cookies/analytics):</strong> páginas acessadas, tempo de visita e informações técnicas do dispositivo/navegador, <em>sem identificação direta do usuário</em>, para entender o uso do site e melhorar a experiência.</li>
+      </ul>
+      <p>Você pode gerenciar cookies nas configurações do seu navegador. Se preferir, use a navegação anônima/privada.</p>
 
-          <article class="card">
-            <h3>BIM &amp; Compatibilização</h3>
-            <p>
-              Modelagem BIM, coordenação e compatibilização de projetos,
-              identificação de interferências e apoio à tomada de decisão
-              em fase de projeto e obra.
-            </p>
-            <div class="card-tags">
-              <span class="card-tag">BIM</span>
-              <span class="card-tag">Compatibilização</span>
-              <span class="card-tag">Gestão de projeto</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+      <h3>3) Para que usamos seus dados</h3>
+      <ul>
+        <li>Responder suas solicitações de contato e orçamento;</li>
+        <li>Melhorar conteúdo, usabilidade e segurança do site;</li>
+        <li>Cumprir obrigações legais ou regulatórias, quando necessário.</li>
+      </ul>
 
-    <!-- PORTFÓLIO (EXEMPLO SIMPLES) -->
-    <section id="portfolio">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="section-kicker">Portfólio</div>
-          <h2 class="section-title">Alguns tipos de empreendimentos que atendemos.</h2>
-          <p class="section-subtitle">
-            Em breve, você poderá visualizar aqui as obras e projetos assinados
-            pela Baroque Works Engenharia.
-          </p>
-        </div>
+      <h3>4) Compartilhamento de dados</h3>
+      <p><strong>Não vendemos nem alugamos</strong> dados pessoais. Compartilhamos apenas quando:</p>
+      <ul>
+        <li>exigido por lei/autoridade competente; ou</li>
+        <li> com fornecedores que nos apoiam no site/infraestrutura (por exemplo, hospedagem), sempre sob dever de confidencialidade e segurança.</li>
+      </ul>
 
-        <div class="portfolio-grid">
-          <article class="portfolio-card">
-            <div class="portfolio-thumb"></div>
-            <div class="portfolio-body">
-              <div class="portfolio-label">Residenciais</div>
-              <div class="portfolio-title">Edifícios multifamiliares</div>
-              <p>Projetos completos para prédios residenciais, desde fundações até a cobertura.</p>
-            </div>
-          </article>
+      <h3>5) Base legal</h3>
+      <p>Tratamos dados com fundamento na <strong>LGPD (Lei 13.709/2018)</strong>, principalmente pelas bases: <strong>consentimento</strong>, <strong>legítimo interesse</strong> (melhoria do site) e <strong>execução de procedimentos preliminares a contrato</strong> (responder pedidos de orçamento/contato).</p>
 
-          <article class="portfolio-card">
-            <div class="portfolio-thumb"></div>
-            <div class="portfolio-body">
-              <div class="portfolio-label">Comerciais</div>
-              <div class="portfolio-title">Lojas e escritórios</div>
-              <p>Espaços pensados para conforto, eficiência e máxima aproveitamento da área construível.</p>
-            </div>
-          </article>
+      <h3>6) Segurança</h3>
+      <p>Adotamos medidas técnicas e administrativas para proteger os dados contra acessos não autorizados, perda, alteração ou divulgação indevida.</p>
 
-          <article class="portfolio-card">
-            <div class="portfolio-thumb"></div>
-            <div class="portfolio-body">
-              <div class="portfolio-label">Industriais</div>
-              <div class="portfolio-title">Galpões e parques</div>
-              <p>Estruturas otimizadas para logística, processos industriais e grandes vãos.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+      <h3>7) Seus direitos (LGPD)</h3>
+      <p>Você pode, a qualquer momento:</p>
+      <ul>
+        <li>solicitar <strong>confirmação</strong> e <strong>acesso</strong> aos dados;</li>
+        <li>pedir <strong>correção</strong> ou <strong>exclusão</strong>;</li>
+        <li><strong>revogar consentimento</strong>;</li>
+        <li>solicitar <strong>portabilidade</strong> quando aplicável;</li>
+        <li>questionar a forma e a finalidade do tratamento.</li>
+      </ul>
+      <p>Para exercer direitos, escreva para <a href="mailto:contato@baroqueworks.com.br">contato@baroqueworks.com.br</a>.</p>
 
-    <!-- CLIENTES -->
-    <section id="clientes">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="section-kicker">Parcerias</div>
-          <h2 class="section-title">Clientes e parceiros que constroem com a gente.</h2>
-          <p class="section-subtitle">
-            Atuamos em parceria com construtoras, incorporadoras, arquitetos e escritórios
-            de engenharia para entregar resultados consistentes em cada projeto.
-          </p>
-        </div>
+      <h3>8) Retenção</h3>
+      <p>Mantemos os dados somente pelo tempo necessário ao propósito informado (ex.: atendimento do contato) e/ou conforme exigências legais.</p>
 
-        <div class="clientes-logos">
-          <!-- Depois você pode trocar por logos reais -->
-          <div class="cliente-item">Construtoras</div>
-          <div class="cliente-item">Incorporadoras</div>
-          <div class="cliente-item">Arquitetos</div>
-          <div class="cliente-item">Investidores</div>
-          <div class="cliente-item">Indústrias</div>
-        </div>
-      </div>
-    </section>
+      <h3>9) Links externos</h3>
+      <p>Nosso site pode conter links para sites de terceiros. Não temos controle sobre o conteúdo e práticas desses sites e não nos responsabilizamos por suas políticas de privacidade.</p>
 
-    <!-- CONTATO -->
-    <section id="contato">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="section-kicker">Contato</div>
-          <h2 class="section-title">Vamos conversar sobre o seu projeto?</h2>
-          <p class="section-subtitle">
-            Envie seus dados e um resumo do empreendimento. Em breve retornaremos
-            com os próximos passos para o seu projeto.
-          </p>
-        </div>
+      <h3>10) Atualizações desta Política</h3>
+      <p>Esta Política pode ser atualizada para refletir melhorias, mudanças legais ou técnicas. A versão vigente será sempre publicada nesta página, com a data de revisão.</p>
 
-        <div class="contato-grid">
-          <div class="contato-info">
-            <p><strong>Telefone:</strong> (31) 0000-0000</p>
-            <p><strong>E-mail:</strong> contato@baroqueworks.com.br</p>
-            <p><strong>Atuação:</strong> Belo Horizonte e região, com possibilidade de atendimento em outros estados.</p>
+      <p><strong>Última atualização:</strong> 11/10/2025</p>
+    </div>
+    <div class="modal__footer">
+      <button type="button" class="btn btn--primary" data-privacy-close>Fechar</button>
+    </div>
+  </div>
 
-            <ul class="contato-list">
-              <li>Projetos completos de engenharia para novos empreendimentos.</li>
-              <li>Adequações e regularizações de edificações existentes.</li>
-              <li>Consultorias técnicas e inspeções estruturais.</li>
-            </ul>
-          </div>
+  <!-- Scripts -->
+  <script>
+    // Atualiza ano
+    const yEl = document.getElementById('year');
+    if(yEl){ yEl.textContent = new Date().getFullYear(); }
 
-          <div class="contato-form">
-            <
+    // Rolagem suave com compensação do header fixo
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id=a.getAttribute('href');
+        const el=document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        const headerH = (document.querySelector('header')?.offsetHeight || 80) + 8;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - headerH;
+        window.scrollTo({top:y, behavior:'smooth'});
+      });
+    });
+
+    // Navegação do carrossel de LOGOMARCAS
+    (function(){
+      const viewport = document.querySelector('[data-logo-viewport]');
+      const prevBtn = document.querySelector('.lg-prev');
+      const nextBtn = document.querySelector('.lg-next');
+      if(!viewport || !prevBtn || !nextBtn) return;
+
+      function updateButtons(){
+        const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth - 1;
+        prevBtn.disabled = viewport.scrollLeft <= 0;
+        nextBtn.disabled = viewport.scrollLeft >= maxScrollLeft;
+      }
+      function stepSize(){
+        return Math.max(240, Math.floor(viewport.clientWidth * 0.8));
+      }
+      prevBtn.addEventListener('click', ()=> viewport.scrollBy({left: -stepSize(), behavior:'smooth'}));
+      nextBtn.addEventListener('click', ()=> viewport.scrollBy({left:  stepSize(), behavior:'smooth'}));
+      viewport.addEventListener('scroll', updateButtons);
+      window.addEventListener('resize', updateButtons);
+      updateButtons();
+    })();
+
+    // Modal de Política de Privacidade
+    (function(){
+      const openers = [
+        document.getElementById('open-privacy'),
+        document.getElementById('open-privacy-2')
+      ].filter(Boolean);
+
+      const modal    = document.querySelector('[data-privacy-modal]');
+      const backdrop = document.querySelector('[data-privacy-backdrop]');
+      const closers  = modal ? modal.querySelectorAll('[data-privacy-close]') : [];
+
+      if(!modal || !backdrop || openers.length === 0) return;
+
+      const body = document.body;
+      let lastFocused = null;
+
+      function openModal(){
+        lastFocused = document.activeElement;
+        backdrop.hidden = false;
+        modal.hidden = false;
+        body.style.overflow = 'hidden';
+        const title = modal.querySelector('#privacy-title');
+        if(title) title.focus({preventScroll:true});
+      }
+
+      function closeModal(){
+        backdrop.hidden = true;
+        modal.hidden = true;
+        body.style.overflow = '';
+        if(lastFocused && typeof lastFocused.focus === 'function'){
+          lastFocused.focus();
+        }
+      }
+
+      openers.forEach(btn => btn.addEventListener('click', openModal));
+      closers.forEach(btn => btn.addEventListener('click', closeModal));
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    })();
+  </script>
+</body>
+</html>
