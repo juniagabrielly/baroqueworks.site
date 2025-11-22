@@ -55,9 +55,7 @@
       position:relative; z-index:0;
     }
 
-    /* === Marca d’água em grade (fundo do site TODO) ===
-       Se o grid ficar forte quando somado ao grid do #sobre,
-       você pode comentar este bloco body::before. */
+    /* === Marca d’água em grade (fundo do site TODO) === */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -87,7 +85,7 @@
     .brand { display:flex; align-items:center; gap:12px }
     .brand img{
       display:block;
-      max-height:80px; /* limite padrão */
+      max-height:80px;
       height:auto;
       width:auto;
       object-fit:contain;
@@ -188,7 +186,7 @@
     @media (max-width:1024px){ .brand img{ max-height:80px !important; } }
     @media (max-width:600px){ .brand img{ max-height:64px !important; } }
     section{ padding:72px 0 !important; }
-    html{ font-size:17.5px; } /* aumenta “tudo” um pouco */
+    html{ font-size:17.5px; }
     .lead{ font-size:clamp(18px,1.9vw,19px) !important; }
     .h1{ font-size:clamp(34px,4.2vw,40px) !important; line-height:1.12 !important; }
     .sec__title{ font-size:clamp(26px,3.2vw,32px) !important; }
@@ -198,7 +196,6 @@
     @media (min-width:1100px){
       .hero__grid{ grid-template-columns:1.1fr 1.1fr !important; }
     }
-    /* marca d'água mais suave em telas pequenas */
     @media (max-width:600px){
       :root{ --wm-opacity:.04; }
     }
@@ -241,19 +238,16 @@
 
   <!-- === CSS do MODAL de Política de Privacidade === -->
   <style>
-    /* Botão com cara de link */
     .linklike{
       background:none; border:none; padding:0; margin:0;
       font: inherit; color:var(--bw-navy); cursor:pointer; text-decoration:underline;
     }
 
-    /* Backdrop */
     .modal-backdrop{
       position:fixed; inset:0; background:rgba(0,0,0,.48);
       z-index:1000;
     }
 
-    /* Modal */
     .modal{
       position:fixed; inset:auto 0 0 0;
       margin:auto; max-width:min(920px,94%); max-height:84vh;
@@ -289,7 +283,6 @@
       .modal{ max-height:90vh; border-radius:16px; }
     }
 
-    /* utilitário de mostrar/ocultar */
     [hidden]{ display:none !important; }
   </style>
 
@@ -306,7 +299,6 @@
       z-index: 1;
       max-width: 900px;
     }
-    /* Grid clarinho no fundo do SOBRE */
     #sobre::before{
       content:"";
       position:absolute; inset:0;
@@ -316,7 +308,6 @@
       pointer-events:none;
       z-index:0;
     }
-    /* Tipografia maior e mais espaçada só no SOBRE */
     #sobre .sec__desc{
       font-size:clamp(18.5px,2.1vw,21px);
       line-height:1.9;
@@ -327,7 +318,6 @@
 
   <!-- === CSS extra para botão WhatsApp menor no mobile === -->
   <style>
-    /* leve ajuste geral no botão do header */
     .btn--whats{
       padding:10px 16px;
       border-radius:12px;
@@ -382,7 +372,6 @@
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
-      <!-- botão com classe específica para ajuste no mobile -->
       <a class="btn btn--primary btn--whats" href="https://wa.me/5537998653393?text=Olá%20Baroque%20Works!%20Quero%20um%20orçamento." target="_blank" rel="noopener">
         Fale no WhatsApp
       </a>
@@ -401,7 +390,6 @@
           <a class="btn btn--ghost" href="#clientes">Nossos clientes</a>
         </div>
       </div>
-      <!-- Capa com IMAGEM -->
       <div class="hero__card">
         <img
           src="assets/projeto_capa.jpg"
@@ -675,7 +663,8 @@
   <!-- Scripts -->
   <script>
     // Atualiza ano
-    const yEl = document.getElementById('year'); if(yEl){ yEl.textContent = new Date().getFullYear(); }
+    const yEl = document.getElementById('year');
+    if(yEl){ yEl.textContent = new Date().getFullYear(); }
 
     // Rolagem suave com compensação do header fixo
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -720,4 +709,39 @@
       ].filter(Boolean);
 
       const modal    = document.querySelector('[data-privacy-modal]');
-      const backdrop = document.querySelector
+      const backdrop = document.querySelector('[data-privacy-backdrop]');
+      const closers  = modal ? modal.querySelectorAll('[data-privacy-close]') : [];
+
+      if(!modal || !backdrop || openers.length === 0) return;
+
+      const body = document.body;
+      let lastFocused = null;
+
+      function openModal(){
+        lastFocused = document.activeElement;
+        backdrop.hidden = false;
+        modal.hidden = false;
+        body.style.overflow = 'hidden';
+        const title = modal.querySelector('#privacy-title');
+        if(title) title.focus({preventScroll:true});
+      }
+
+      function closeModal(){
+        backdrop.hidden = true;
+        modal.hidden = true;
+        body.style.overflow = '';
+        if(lastFocused && typeof lastFocused.focus === 'function'){
+          lastFocused.focus();
+        }
+      }
+
+      openers.forEach(btn => btn.addEventListener('click', openModal));
+      closers.forEach(btn => btn.addEventListener('click', closeModal));
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    })();
+  </script>
+</body>
+</html>
