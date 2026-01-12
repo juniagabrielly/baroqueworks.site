@@ -8,7 +8,6 @@
   <meta name="description" content="Projetos completos em Arquitetura e Engenharia: estrutural, elétrico, hidráulico, fundações, contenções, drenagem, saneamento, BIM e inspeções técnicas." />
   <meta name="robots" content="index,follow" />
 
-  <!-- Canonical (evita duplicidade www/sem-www) -->
   <link rel="canonical" href="https://baroqueworks.com.br/">
 
   <!-- Open Graph -->
@@ -19,17 +18,13 @@
   <meta property="og:image" content="https://baroqueworks.com.br/assets/og-image.jpg" />
   <meta property="og:locale" content="pt_BR" />
 
-  <!-- Google Search Console -->
   <meta name="google-site-verification" content="7UHFS3YxP_GJdQVxQs9ee0H5M3QE5yp7EcnSGLXzJqo" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
 
-  <!-- Performance: preconnect para Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Google Fonts: Montserrat (títulos) + Poppins (corpo) -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -40,7 +35,6 @@
       --bw-mist:#eef2f6;
       --bw-cloud:#f7f9fc;
 
-      /* Marca d’água (ajustes) */
       --wm-size: 320px;
       --wm-opacity: .06;
     }
@@ -48,14 +42,14 @@
     *{ box-sizing:border-box }
 
     html{ font-size:16px }
-    html,body{
+    body{
       margin:0; padding:0; background:#fff; color:var(--bw-ink);
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
       font-weight:400; line-height:1.6; min-height:100%;
-      position:relative; z-index:0;
+      position:relative;
     }
 
-    /* === Marca d’água em grade (fundo do site TODO) === */
+    /* Marca d’água global */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -66,11 +60,10 @@
       pointer-events:none;
       z-index:0;
     }
-    /* conteúdo acima da marca d'água */
 
-    header, main, section, footer, .container, .hero, .cta { position:relative; z-index:1; }
+    header, main, section, footer, .container { position:relative; z-index:1; }
 
-    img,video{ max-width:100%; height:auto; display:block }
+    img{ max-width:100%; height:auto; display:block }
     a{ color:inherit; text-decoration:none }
     .container{ width:min(1120px,92%); margin-inline:auto }
 
@@ -80,16 +73,11 @@
       backdrop-filter:saturate(180%) blur(8px);
       border-bottom:1px solid #e5e9f2;
     }
-    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px }
 
-    /* Logo responsiva (mantém proporção, sem esticar) */
     .brand { display:flex; align-items:center; gap:12px }
     .brand img{
-      display:block;
-      max-height:80px;
-      height:auto;
-      width:auto;
-      object-fit:contain;
+      max-height:80px; width:auto; height:auto; object-fit:contain;
     }
     @media (max-width:1024px){ .brand img{ max-height:65px } }
     @media (max-width:600px){ .brand img{ max-height:55px } }
@@ -97,15 +85,18 @@
     nav ul{ display:flex; gap:18px; list-style:none; margin:0; padding:0 }
 
     .btn{
-      display:inline-flex; align-items:center; gap:10px;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding:12px 18px; border-radius:14px; border:1px solid transparent;
-      font-weight:600; transition:.2s ease;
+      font-weight:600; transition:.2s ease; white-space:nowrap;
+      font-family:'Montserrat',sans-serif;
+      font-size:clamp(16px,1.6vw,18px);
+      letter-spacing:.02em;
     }
     .btn--primary{ background:var(--bw-navy); color:#fff }
     .btn--primary:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(12,27,42,.18) }
-    .btn--ghost{ border-color:var(--bw-navy) }
+    .btn--ghost{ border-color:var(--bw-navy); color:var(--bw-navy); background:transparent }
 
-    /* ==== NOVA CAPA COM IMAGEM DE FUNDO ==== */
+    /* Hero */
     .hero{
       position:relative;
       padding:96px 0 80px;
@@ -116,7 +107,6 @@
     .hero::before{
       content:"";
       position:absolute; inset:0;
-      /* coloque aqui o nome do arquivo da imagem que você salvou em /assets */
       background-image:
         linear-gradient(120deg, rgba(2,6,23,0.88) 0%, rgba(2,6,23,0.40) 45%, rgba(2,6,23,0.90) 100%),
         url("assets/hero-baroque-works.jpg");
@@ -125,53 +115,26 @@
       background-repeat:no-repeat;
       z-index:0;
     }
-    .hero > .container{
-      position:relative;
-      z-index:1;
-    }
-    .hero__grid{
-      display:block;
-      max-width:720px;
-    }
+    .hero > .container{ position:relative; z-index:1; }
+    .hero__grid{ display:block; max-width:760px; }
 
-    /* Tipografia */
     .eyebrow{
       font-family:'Montserrat',sans-serif; font-weight:600;
       font-size:14px; letter-spacing:.12em; color:var(--bw-gold); text-transform:uppercase
     }
     .h1{
       font-family:'Montserrat',sans-serif; font-weight:800;
-      font-size:clamp(28px,3vw,32px); line-height:1.15; margin:.35em 0; color:var(--bw-navy)
+      font-size:clamp(28px,3vw,32px);
+      line-height:1.15; margin:.35em 0;
+      color:var(--bw-navy);
     }
     .lead{ font-size:clamp(17px,1.6vw,18px); color:#344054 }
 
-    /* cor bege/dourada e efeito por letra no título */
-    .gold{
-      color:var(--bw-gold);
-    }
-
-    .hero-title{
-      display:inline-block;
-    }
     .gold{ color:var(--bw-gold); }
 
-    .hero-title{ display:inline-block; }
-    .hero-title .letter{
-      display:inline-block;
-      transform-origin:bottom center;
-      animation:pulseLetter 0.45s ease-in-out forwards;
-    }
-
-    @keyframes pulseLetter{
-      0%   { transform:scale(1); }
-      40%  { transform:scale(1.23); }
-      100% { transform:scale(1); }
-    }
-
-    /* ajustes de cor dentro da capa */
+    /* Ajustes na hero (sobrescreve cores) */
     .hero .h1{ color:#f9fafb; }
     .hero .lead{ color:#e2e8f0; }
-    .hero .eyebrow{ color:var(--bw-gold); }
     .hero .btn--primary{
       background:var(--bw-gold);
       border-color:var(--bw-gold);
@@ -185,6 +148,19 @@
       border-color:#e2e8f0;
       color:#e2e8f0;
       background:transparent;
+    }
+
+    /* Animação por letra (mais suave/mais lenta) */
+    .hero-title{ display:inline-block; }
+    .hero-title .letter{
+      display:inline-block;
+      transform-origin:bottom center;
+      animation:pulseLetter 0.75s ease-in-out forwards;
+    }
+    @keyframes pulseLetter{
+      0%   { transform:scale(1); }
+      45%  { transform:scale(1.16); }
+      100% { transform:scale(1); }
     }
 
     section{ padding:60px 0; scroll-margin-top:88px }
@@ -207,16 +183,9 @@
     .card p,.sec__desc,footer p{ font-size:clamp(16px,1.4vw,18px) }
     .copyright{ font-size:14px }
 
-    /* Listas de serviços (tópicos) */
     .list{ margin:0; padding:0; list-style:none; display:grid; gap:10px }
     .list li{ display:flex; align-items:flex-start; gap:10px; color:#334155 }
     .list li::before{ content:"•"; color:var(--bw-gold); font-weight:800; line-height:1; margin-top:2px }
-
-    /* Botões e menus */
-    nav ul a,.btn{
-      font-family:'Montserrat',sans-serif; font-weight:600;
-      font-size:clamp(16px,1.6vw,18px); letter-spacing:.02em; text-transform:none
-    }
 
     /* CTA */
     .cta{
@@ -239,43 +208,26 @@
       .foot{ grid-template-columns:1fr }
       nav ul{ display:none }
       .cta{ flex-direction:column; align-items:flex-start }
-      .hero{
-        padding:84px 0 72px;
-      }
-      .hero__grid{
-        max-width:100%;
-      }
       .hero{ padding:84px 0 72px; }
       .hero__grid{ max-width:100%; }
     }
-  </style>
 
-  <!-- === OVERRIDES – Layout grande (container/logo/tipos) === -->
-  <!-- Overrides -->
-  <style>
-    .container{ width:min(1280px,94%) !important; }
-    .brand img{ max-height:96px !important; }
-    @media (max-width:1024px){ .brand img{ max-height:80px !important; } }
-    @media (max-width:600px){ .brand img{ max-height:64px !important; } }
-    section{ padding:72px 0 !important; }
+    /* Overrides layout maior */
+    .container{ width:min(1280px,94%); }
+    .brand img{ max-height:96px; }
+    @media (max-width:1024px){ .brand img{ max-height:80px; } }
+    @media (max-width:600px){ .brand img{ max-height:64px; } }
+    section{ padding:72px 0; }
     html{ font-size:17.5px; }
-    .lead{ font-size:clamp(18px,1.9vw,19px) !important; }
-    .h1{ font-size:clamp(34px,4.2vw,40px) !important; line-height:1.12 !important; }
-    .sec__title{ font-size:clamp(26px,3.2vw,32px) !important; }
-    .card p,.sec__desc,footer p{ font-size:clamp(17px,1.6vw,18.5px) !important; }
-    nav ul a,.btn{ font-size:clamp(18px,2vw,20px) !important; }
-    .cta h3{ font-size:clamp(24px,2.6vw,28px) !important; }
-    @media (min-width:1100px){
-      .hero__grid{ max-width:760px !important; }
-    }
-    @media (max-width:600px){
-      :root{ --wm-opacity:.04; }
-    }
-  </style>
+    .lead{ font-size:clamp(18px,1.9vw,19px); }
+    .h1{ font-size:clamp(34px,4.2vw,40px); line-height:1.12; }
+    .sec__title{ font-size:clamp(26px,3.2vw,32px); }
+    .card p,.sec__desc,footer p{ font-size:clamp(17px,1.6vw,18.5px); }
+    .btn{ font-size:clamp(18px,2vw,20px); }
+    .cta h3{ font-size:clamp(24px,2.6vw,28px); }
+    @media (max-width:600px){ :root{ --wm-opacity:.04; } }
 
-  <!-- === Estilos do BLOCO DE LOGOMARCAS (fixo, com setas) === -->
-  <!-- Slider clientes -->
-  <style>
+    /* Slider clientes */
     .clients .sec__title,.clients .sec__desc{ text-align:center; }
     .logo-slider2{
       display:flex; align-items:center; gap:10px;
@@ -293,12 +245,12 @@
     .logo-viewport{
       overflow:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
       scrollbar-width:thin; flex:1 1 auto;
-      scroll-behavior:smooth; /* deixa a navegação mais suave */
+      scroll-behavior:smooth;
     }
     .logo-row{
       display:flex; align-items:center; gap:42px; padding:6px; min-width:100%;
     }
-    .logo-row img, .logo-row a{ scroll-snap-align:center; flex:0 0 auto; }
+    .logo-row img{ scroll-snap-align:center; flex:0 0 auto; }
     .logo-row img{
       height:48px; width:auto; filter:grayscale(100%); opacity:.85; transition:.2s ease;
     }
@@ -308,62 +260,8 @@
       .logo-row{ gap:28px; }
       .logo-row img{ height:40px; }
     }
-  </style>
 
-  <!-- === CSS do MODAL de Política de Privacidade === -->
-  <!-- Modal privacidade (CSS mantido) -->
-  <style>
-    .linklike{
-      background:none; border:none; padding:0; margin:0;
-      font: inherit; color:var(--bw-navy); cursor:pointer; text-decoration:underline;
-    }
-
-    .modal-backdrop{
-      position:fixed; inset:0; background:rgba(0,0,0,.48);
-      z-index:1000;
-    }
-
-    .modal{
-      position:fixed; inset:auto 0 0 0;
-      margin:auto; max-width:min(920px,94%); max-height:84vh;
-      background:#fff; border-radius:18px; border:1px solid #e8edf4;
-      box-shadow:0 20px 60px rgba(12,27,42,.25);
-      display:flex; flex-direction:column; overflow:hidden; z-index:1001;
-      top:50%; transform:translateY(-50%);
-    }
-    .modal__header{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:16px 18px; border-bottom:1px solid #eef2f6; background:#f9fbff;
-    }
-    .modal__header h2{
-      margin:0; font-family:'Montserrat',sans-serif; font-weight:700; color:#0C1B2A; font-size:clamp(18px,2.4vw,22px);
-    }
-    .modal__close{
-      background:#0C1B2A; color:#fff; border:none; width:36px; height:36px; border-radius:10px; font-size:20px; cursor:pointer;
-    }
-    .modal__body{
-      padding:18px; overflow:auto;
-    }
-    .modal__body h3{
-      font-family:'Montserrat',sans-serif; color:#0C1B2A; margin:22px 0 8px; font-size:clamp(16px,2.2vw,20px);
-    }
-    .modal__body p, .modal__body li{
-      font-size:clamp(15px,1.8vw,17px); color:#344054;
-    }
-    .modal__footer{
-      padding:12px 18px; border-top:1px solid #eef2f6; display:flex; justify-content:flex-end; gap:10px;
-    }
-
-    @media (max-width:640px){
-      .modal{ max-height:90vh; border-radius:16px; }
-    }
-
-    [hidden]{ display:none !important; }
-  </style>
-
-  <!-- === CSS do SOBRE centralizado + grid de fundo somente nessa seção === -->
-  <!-- Sobre -->
-  <style>
+    /* Sobre centralizado com marca d'água só nele */
     #sobre{
       position: relative;
       text-align: center;
@@ -383,6 +281,7 @@
       background-size:320px auto;
       pointer-events:none;
       z-index:0;
+      opacity:.08;
     }
     #sobre .sec__desc{
       font-size:clamp(18.5px,2.1vw,21px);
@@ -390,16 +289,8 @@
       margin:0 0 18px;
       color:#344054;
     }
-  </style>
 
-  <!-- === CSS extra para botão WhatsApp menor no mobile === -->
-  <!-- Whats menor mobile -->
-  <style>
-    .btn--whats{
-      padding:10px 16px;
-      border-radius:12px;
-    }
-
+    /* Whats menor mobile */
     .btn--whats{ padding:10px 16px; border-radius:12px; }
     @media (max-width:600px){
       .btn--whats{
@@ -410,7 +301,7 @@
     }
   </style>
 
-  <!-- === Schema.org (JSON-LD) — ajuda no SEO local/entidade === -->
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -443,7 +334,8 @@
       <div class="brand">
         <img src="assets/logo-horizontal.png" alt="Baroque Works Engenharia" />
       </div>
-      <nav>
+
+      <nav aria-label="Navegação principal">
         <ul>
           <li><a href="#servicos">Serviços</a></li>
           <li><a href="#clientes">Clientes</a></li>
@@ -451,7 +343,7 @@
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
-      <a class="btn btn--primary btn--whats" href="https://wa.me/5537998653393?text=Olá%20Baroque%20Works!%20Quero%20um%20orçamento." target="_blank" rel="noopener">
+
       <a class="btn btn--primary btn--whats"
          href="https://wa.me/5537998653393?text=Olá%20Baroque%20Works!%20Quero%20um%20orçamento."
          target="_blank" rel="noopener">
@@ -460,8 +352,8 @@
     </div>
   </header>
 
-  <!-- Hero – NOVO LAYOUT COM IMAGEM DE FUNDO -->
-  <section class="hero">
+  <!-- Hero -->
+  <section class="hero" aria-label="Apresentação">
     <div class="container hero__grid">
       <div>
         <span class="eyebrow">Excelência em projetos de engenharia</span>
@@ -566,7 +458,6 @@
     </div>
   </section>
 
-  <!-- CLIENTES -->
   <!-- Clientes -->
   <section id="clientes">
     <div class="container">
@@ -576,7 +467,6 @@
 
         <div class="logo-slider2" aria-label="Clientes Baroque Works">
           <button class="logo-btn lg-prev" type="button" aria-label="Anterior">‹</button>
-          <div class="logo-viewport" data-logo-viewport>
 
           <div class="logo-viewport" data-logo-viewport aria-label="Lista de clientes (rolagem horizontal)">
             <div class="logo-row">
@@ -657,7 +547,6 @@
   </section>
 
   <!-- Footer -->
-  <!-- Footer (FINALIZADO) -->
   <footer>
     <div class="container">
       <div class="foot">
@@ -679,7 +568,6 @@
 
         <div>
           <h4>Contato</h4>
-          <p>comercial@baroqueworks.com.br<br>BH •
           <p>
             <a href="mailto:comercial@baroqueworks.com.br">comercial@baroqueworks.com.br</a><br>
             <a href="tel:+5537998653393">(37) 9 9865-3393</a><br>
@@ -690,22 +578,19 @@
     </div>
   </footer>
 
-  <!-- ✅ JS: slider + animação do título + ano -->
+  <!-- JS: slider + animação do título + ano -->
   <script>
     // Ano no footer
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Animação por letra (somente para textos SEM tags internas)
+    // Animação por letra (preserva spans internos como .gold)
     (function animateHeroTitle(){
       const title = document.querySelector(".hero-title");
       if (!title) return;
-
-      // Se já tiver spans internos, não mexe
       if (title.querySelector(".letter")) return;
 
-      // Pega texto visível, mantendo spans internos (ex: .gold) sem quebrar
-      // Estratégia: quebra apenas nós de texto diretos dentro do h1 (não mexe dentro do span.gold)
       const nodes = Array.from(title.childNodes);
+
       nodes.forEach((node) => {
         if (node.nodeType === Node.TEXT_NODE) {
           const text = node.textContent;
@@ -714,8 +599,10 @@
           Array.from(text).forEach((ch, idx) => {
             const span = document.createElement("span");
             span.className = "letter";
-            span.style.animationDelay = (idx * 0.03) + "s";
-            span.textContent = ch;
+            // delay mais lento
+            span.style.animationDelay = (idx * 0.04) + "s";
+            // mantém espaços sem quebrar layout
+            span.textContent = (ch === " ") ? "\u00A0" : ch;
             frag.appendChild(span);
           });
 
@@ -735,7 +622,6 @@
 
       if (!viewport || !btnPrev || !btnNext) return;
 
-      // Quanto rolar por clique (ajusta automático pelo tamanho do container)
       function step(){
         return Math.max(260, Math.floor(viewport.clientWidth * 0.7));
       }
@@ -759,8 +645,8 @@
       viewport.addEventListener("scroll", updateButtons, { passive: true });
       window.addEventListener("resize", updateButtons);
 
-      // Estado inicial
       updateButtons();
     })();
   </script>
 </body>
+</html>
