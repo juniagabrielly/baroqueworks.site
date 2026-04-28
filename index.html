@@ -357,6 +357,56 @@
     }
 
     [hidden]{ display:none !important; }
+
+    [hidden]{ display:none !important; }
+
+/* ================= CLIENTES GRID (ESTILO PREMIUM) ================= */
+
+.clients-grid {
+  text-align: center;
+}
+
+.logos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-top: 40px;
+  align-items: center;
+}
+
+.logos-grid img {
+  max-height: 60px;
+  margin: 0 auto;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: 0.3s ease;
+}
+
+.logos-grid img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .logos-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .logos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .logos-grid img {
+    max-height: 50px;
+  }
+}
   </style>
 
   <!-- Schema.org -->
@@ -520,34 +570,28 @@
     </div>
   </section>
 
-  <!-- CLIENTES -->
-  <section id="clientes">
-    <div class="container">
-      <div class="clients">
-        <h3 class="sec__title">Algumas marcas atendidas</h3>
-        <p class="sec__desc">Projetos e consultorias para varejo, corporativo e indústrias.</p>
+ <!-- CLIENTES -->
+<section id="clientes">
+  <div class="container">
+    <div class="clients-grid">
+      <h3 class="sec__title">Clientes e parceiros</h3>
+      <p class="sec__desc">
+        Empresas que confiam na Baroque Works Engenharia.
+      </p>
 
-        <div class="logo-slider2" aria-label="Clientes Baroque Works">
-          <button class="logo-btn lg-prev" type="button" aria-label="Anterior">‹</button>
-
-          <div class="logo-viewport" data-logo-viewport aria-label="Lista de clientes (rolagem horizontal)">
-            <div class="logo-row">
-              <img src="assets/cliente1.png" alt="Cliente 1">
-              <img src="assets/cliente2.png" alt="Cliente 2">
-              <img src="assets/cliente3.webp" alt="Cliente 3">
-              <img src="assets/cliente4.png" alt="Cliente 4">
-              <img src="assets/cliente5.png" alt="Cliente 5">
-              <img src="assets/cliente6.png" alt="Cliente 6">
-              <img src="assets/cliente7.png" alt="Cliente 7">
-              <img src="assets/mcmv.png" alt="Cliente 8">
-            </div>
-          </div>
-
-          <button class="logo-btn lg-next" type="button" aria-label="Próxima">›</button>
-        </div>
+      <div class="logos-grid">
+        <img src="assets/cliente1.png" alt="">
+        <img src="assets/cliente2.png" alt="">
+        <img src="assets/cliente3.webp" alt="">
+        <img src="assets/cliente4.png" alt="">
+        <img src="assets/cliente5.png" alt="">
+        <img src="assets/cliente6.png" alt="">
+        <img src="assets/cliente7.png" alt="">
+        <img src="assets/mcmv.png" alt="">
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- CTA -->
   <section id="cta">
