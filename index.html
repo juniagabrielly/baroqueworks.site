@@ -358,7 +358,6 @@
 
     [hidden]{ display:none !important; }
 
-    [hidden]{ display:none !important; }
 
 /* ================= CLIENTES GRID (ESTILO PREMIUM) ================= */
 
@@ -396,19 +395,7 @@
     gap: 36px;
   }
 }
-
-/* Mobile */
-@media (max-width: 600px) {
-  .logos-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 26px;
-  }
-
-  .logos-grid img {
-    max-height: 60px;
-  }
-
-  /* ================= CASES ================= */
+/* ================= CASES ================= */
 
 .case-feature {
   display: grid;
@@ -452,6 +439,18 @@
   font-size: clamp(17px, 1.6vw, 18.5px);
 }
 
+/* Mobile */
+@media (max-width: 600px) {
+  .logos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+
+  .logos-grid img {
+    max-height: 60px;
+  }
+
+  
 @media (max-width: 900px) {
   .case-feature {
     grid-template-columns: 1fr;
@@ -655,11 +654,12 @@ dispositivos de aspiração, drenagem e retorno
 dimensionamento hidráulico completo
 integração com sistemas de aquecimento
 
-Com isso, o sistema foi projetado para entregar:
-✔ eficiência na circulação da água
-✔ qualidade sanitária adequada
-✔ desempenho otimizado dos equipamentos
-✔ redução de retrabalho em obra
+<ul class="list">
+  <li>Eficiência na circulação da água</li>
+  <li>Qualidade sanitária adequada</li>
+  <li>Desempenho otimizado dos equipamentos</li>
+  <li>Redução de retrabalho em obra</li>
+</ul>
 
 Além disso, o rigor técnico aplicado no desenvolvimento do projeto é resultado de experiência prática em grandes empresas e empreendimentos, garantindo soluções alinhadas com padrões elevados de engenharia e execução.
 
@@ -668,6 +668,9 @@ O resultado é um projeto seguro, eficiente e preparado para uma execução mais
       </div>
     </article>
   </div>
+  <a class="btn btn--primary" href="https://wa.me/5537998653393" target="_blank">
+  Solicitar projeto semelhante
+</a>
 </section>
 
  <!-- CLIENTES -->
@@ -845,43 +848,6 @@ O resultado é um projeto seguro, eficiente e preparado para uma execução mais
     (function setYear(){
       const el = document.getElementById("year");
       if (el) el.textContent = new Date().getFullYear();
-    })();
-
-    // Slider de logos (setas clicáveis)
-    (function logoSlider(){
-      const slider = document.querySelector(".logo-slider2");
-      if (!slider) return;
-
-      const viewport = slider.querySelector("[data-logo-viewport]");
-      const btnPrev = slider.querySelector(".lg-prev");
-      const btnNext = slider.querySelector(".lg-next");
-
-      if (!viewport || !btnPrev || !btnNext) return;
-
-      function step(){
-        return Math.max(260, Math.floor(viewport.clientWidth * 0.7));
-      }
-
-      function updateButtons(){
-        const maxScroll = viewport.scrollWidth - viewport.clientWidth;
-        const x = viewport.scrollLeft;
-
-        btnPrev.disabled = x <= 2;
-        btnNext.disabled = x >= maxScroll - 2;
-      }
-
-      btnPrev.addEventListener("click", () => {
-        viewport.scrollBy({ left: -step(), behavior: "smooth" });
-      });
-
-      btnNext.addEventListener("click", () => {
-        viewport.scrollBy({ left: step(), behavior: "smooth" });
-      });
-
-      viewport.addEventListener("scroll", updateButtons, { passive: true });
-      window.addEventListener("resize", updateButtons);
-
-      updateButtons();
     })();
 
     // Modal Política de Privacidade
