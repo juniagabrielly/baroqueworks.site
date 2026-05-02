@@ -127,12 +127,16 @@
 
     /* ================= HERO ================= */
     .hero{
-      position:relative;
-      padding:96px 0 80px;
-      color:#fff;
-      background-color:#020617;
-      overflow:hidden;
-    }
+  position:relative;
+  padding:96px 0 80px;
+  color:#fff;
+  overflow:hidden;
+
+  /* 👇 ESSA PARTE NOVA */
+  width: min(1280px, 94%);
+  margin: 0 auto;
+  border-radius: 0 0 24px 24px;
+}
     .hero::before{
       content:"";
       position:absolute; inset:0;
